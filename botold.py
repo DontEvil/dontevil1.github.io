@@ -1,10 +1,15 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
-import asyncio
+import logging
 
 # Токен бота (вставь свой токен)
 TOKEN = "7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA"
 CHANNEL = "@dontev1l"  # Канал для подписки
+
+# Включаем логирование
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Команда /start
 async def start(update: Update, context: CallbackContext) -> None:
@@ -32,7 +37,7 @@ async def start(update: Update, context: CallbackContext) -> None:
             )
     except Exception as e:
         await update.message.reply("Произошла ошибка при проверке подписки.")
-        print(f"Error: {e}")
+        logger.error(f"Error: {e}")
 
 async def main():
     # Создаем приложение с токеном
@@ -41,9 +46,10 @@ async def main():
     # Добавляем обработчик команды /start
     application.add_handler(CommandHandler("start", start))
 
-    # Запуск бота
+    # Запуск бота с polling
     await application.run_polling()
 
 # Запуск
 if __name__ == '__main__':
+    import asyncio
     asyncio.run(main())
