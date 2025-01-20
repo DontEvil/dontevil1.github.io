@@ -1,37 +1,28 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo, Update
-from telegram.ext import Application, CommandHandler, CallbackContext
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
+from telegram.ext import Application, CommandHandler
 
-TOKEN = '7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA'
-
-async def start(update: Update, context: CallbackContext) -> None:
-    user = update.message.from_user
-    # Создаем кнопку для открытия Web App
+# Обработчик команды /start
+async def start(update, context):
     keyboard = [
-        [InlineKeyboardButton("Открыть Web App", web_app=WebAppInfo(url="https://dontevil.github.io/dontevil1.github.io/"))]
+        [
+            InlineKeyboardButton("Open Web App", web_app=WebAppInfo(url="https://your-web-app-url.com"))
+        ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text("Hello! Click the button below to open the Web App:", reply_markup=reply_markup)
 
-    await update.message.reply_text(
-        f"Привет, {user.first_name}! Для взаимодействия с ботом нажми на кнопку ниже.",
-        reply_markup=reply_markup
-    )
-
+# Главная функция
 async def main():
-    # Создание приложения (заменили Updater на Application)
-    application = Application.builder().token(TOKEN).build()
+    application = Application.builder().token("7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA").build()
 
-    # Добавление команды /start
+    # Добавляем обработчик команды /start
     application.add_handler(CommandHandler("start", start))
 
-    # Запуск бота
+    # Запускаем бота
     await application.run_polling()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import asyncio
-    # Убедитесь, что не создается новый цикл событий, если он уже существует
-    loop = asyncio.get_event_loop()
-    if loop.is_running():
-        from asyncio import tasks
-        tasks.create_task(main())
-    else:
-        loop.run_until_complete(main())
+    # Вместо asyncio.run используем event loop из telegram.ext
+    asyncio.create_task(main())
+    asyncio.get_event_loop().run_forever()
