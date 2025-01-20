@@ -1,55 +1,21 @@
-from telegram import Update
-from telegram.ext import Application, CommandHandler, CallbackContext
-import logging
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CommandHandler
 
-# Токен бота (вставь свой токен)
-TOKEN = "7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA"
-CHANNEL = "@dontev1l"  # Канал для подписки
+TOKEN = '7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA'
 
-# Включаем логирование
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
-logger = logging.getLogger(__name__)
+def start(update, context):
+    keyboard = [
+        [InlineKeyboardButton("Запустить игру", url="https://dontevil.github.io/dontevil1.github.io/")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    update.message.reply_text("Добро пожаловать в GTA 5 Bot!", reply_markup=reply_markup)
 
-# Команда /start
-async def start(update: Update, context: CallbackContext) -> None:
-    user = update.effective_user
-    user_id = user.id
+def main():
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+    dp.add_handler(CommandHandler("start", start))
+    updater.start_polling()
+    updater.idle()
 
-    # Проверяем, подписан ли пользователь на канал
-    try:
-        chat_member = await context.bot.get_chat_member(CHANNEL, user_id)
-        if chat_member.status in ['member', 'administrator', 'creator']:
-            # Пользователь подписан
-            await update.message.reply(
-                "Вы успешно подписаны на канал! Теперь открываем мини-апп.",
-                reply_markup=None
-            )
-            # Ссылка на мини-апп
-            await update.message.reply(
-                "Перейти к мини-аппу: https://dontevil.github.io/dontevil1.github.io/"
-            )
-        else:
-            # Если не подписан
-            await update.message.reply(
-                "Пожалуйста, подпишитесь на канал, чтобы продолжить.",
-                reply_markup=None
-            )
-    except Exception as e:
-        await update.message.reply("Произошла ошибка при проверке подписки.")
-        logger.error(f"Error: {e}")
-
-async def main():
-    # Создаем приложение с токеном
-    application = Application.builder().token(TOKEN).build()
-
-    # Добавляем обработчик команды /start
-    application.add_handler(CommandHandler("start", start))
-
-    # Запуск бота с polling
-    await application.run_polling()
-
-# Запуск
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    main()
