@@ -28,4 +28,10 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio
-    asyncio.get_event_loop().run_until_complete(main())
+    # Убедитесь, что не создается новый цикл событий, если он уже существует
+    loop = asyncio.get_event_loop()
+    if loop.is_running():
+        from asyncio import tasks
+        tasks.create_task(main())
+    else:
+        loop.run_until_complete(main())
