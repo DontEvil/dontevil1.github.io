@@ -1,37 +1,49 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import Update
 from telegram.ext import Application, CommandHandler, CallbackContext
+import asyncio
 
-# Загружаем токен бота из .env (или напрямую в коде)
-import os
-from dotenv import load_dotenv
+# Токен бота (вставь свой токен)
+TOKEN = "7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA"
+CHANNEL = "@dontev1l"  # Канал для подписки
 
-# Загрузка переменных из .env файла
-load_dotenv()
+# Команда /start
+async def start(update: Update, context: CallbackContext) -> None:
+    user = update.effective_user
+    user_id = user.id
 
-TOKEN = os.getenv("7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA")
+    # Проверяем, подписан ли пользователь на канал
+    try:
+        chat_member = await context.bot.get_chat_member(CHANNEL, user_id)
+        if chat_member.status in ['member', 'administrator', 'creator']:
+            # Пользователь подписан
+            await update.message.reply(
+                "Вы успешно подписаны на канал! Теперь открываем мини-апп.",
+                reply_markup=None
+            )
+            # Ссылка на мини-апп
+            await update.message.reply(
+                "Перейти к мини-аппу: https://dontevil.github.io/dontevil1.github.io/"
+            )
+        else:
+            # Если не подписан
+            await update.message.reply(
+                "Пожалуйста, подпишитесь на канал, чтобы продолжить.",
+                reply_markup=None
+            )
+    except Exception as e:
+        await update.message.reply("Произошла ошибка при проверке подписки.")
+        print(f"Error: {e}")
 
-# Функция для обработки команды /start
-async def start(update: Update, context: CallbackContext):
-    # Создаем кнопку для перехода в мини-приложение
-    keyboard = [
-        [InlineKeyboardButton("Перейти в мини-апп", web_app={"url": "https://your-username.github.io/your-repository-name/"})]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    
-    # Отправляем сообщение с кнопкой
-    await update.message.reply_text('Привет! Нажми кнопку, чтобы открыть мини-апп:', reply_markup=reply_markup)
-
-# Главная функция, создающая и запускающая бота
 async def main():
-    # Создание бота с использованием токена
+    # Создаем приложение с токеном
     application = Application.builder().token(TOKEN).build()
 
-    # Добавляем обработчик для команды /start
+    # Добавляем обработчик команды /start
     application.add_handler(CommandHandler("start", start))
 
-    # Запускаем бота
+    # Запуск бота
     await application.run_polling()
 
+# Запуск
 if __name__ == '__main__':
-    import asyncio
     asyncio.run(main())
