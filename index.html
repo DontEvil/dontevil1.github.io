@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мини-апп</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('https://ryansechrest.com/content/images/2022/08/nodes.gif') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+        .header, .footer {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 20px;
+        }
+        .header {
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .header .username {
+            margin-right: 20px;
+        }
+        .header .heart {
+            cursor: pointer;
+            font-size: 30px;
+        }
+        .footer {
+            bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .button {
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="username">User123</div>
+        <div class="heart" onclick="showTopUsers()">❤️</div>
+    </div>
+
+    <div class="footer">
+        <button class="button" onclick="goToTask()">Задание</button>
+        <button class="button" onclick="goToShop()">Магазин</button>
+        <button class="button" onclick="goToFAQ()">FAQ</button>
+    </div>
+
+    <script>
+        function showTopUsers() {
+            window.location.href = "https://your-site-url.com/top-users";
+        }
+
+        function goToTask() {
+            window.location.href = "https://your-site-url.com/task";
+        }
+
+        function goToShop() {
+            window.location.href = "https://your-site-url.com/shop";
+        }
+
+        function goToFAQ() {
+            window.location.href = "https://your-site-url.com/faq";
+        }
+    </script>
+</body>
+</html>
