@@ -21,5 +21,5 @@ async def main():
     await application.run_polling()
 
 if __name__ == '__main__':
-    import asyncio
-    asyncio.run(main())
+    # Убираем asyncio.run и напрямую запускаем run_polling
+    main()
