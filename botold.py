@@ -1,18 +1,19 @@
 from telegram import Update
-from telegram.ext import Application, CommandHandler, CallbackContext
+from telegram.ext import Application, CommandHandler, CallbackContext, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 
 TOKEN = '7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA'
 
 async def start(update: Update, context: CallbackContext) -> None:
     user = update.message.from_user
-    # Отправка кнопки для открытия Web App
+    # Создаем кнопку для открытия Web App
+    keyboard = [
+        [InlineKeyboardButton("Открыть Web App", web_app=WebAppInfo(url="https://dontevil.github.io/dontevil1.github.io/"))]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
     await update.message.reply_text(
         f"Привет, {user.first_name}! Для взаимодействия с ботом нажми на кнопку ниже.",
-        reply_markup={
-            "inline_keyboard": [
-                [{"text": "Открыть Web App", "url": "https://dontevil.github.io/dontevil1.github.io/"}]
-            ]
-        }
+        reply_markup=reply_markup
     )
 
 async def main():
@@ -27,4 +28,4 @@ async def main():
 
 if __name__ == '__main__':
     import asyncio
-    asyncio.run(main())
+    asyncio.get_event_loop().run_until_complete(main())
