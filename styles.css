@@ -89,12 +89,20 @@ body {
 
 /* Стили для футера */
 .footer {
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
-    color: #aaa;
-    position: absolute;
-    bottom: 10px;
+    color: white;
+    position: fixed;
+    bottom: 0;
     width: 100%;
+    background-color: #000; /* Черный фон */
+    padding: 10px 0;
+    transition: background-color 0.3s ease; /* Плавное изменение фона */
+}
+
+/* Псевдокласс для изменения фона при наведении */
+.footer:hover {
+    background-color: #444; /* Более серый фон при наведении */
 }
 
 /* Мобильная версия */
