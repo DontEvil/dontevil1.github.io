@@ -11,6 +11,7 @@ body {
     justify-content: center;
     height: 100vh;
     padding: 10px;
+    box-sizing: border-box; /* Для правильных отступов */
 }
 
 /* Контейнер для всего контента */
@@ -46,13 +47,12 @@ body {
 /* Стили для колонок с кнопками */
 .button-column {
     display: flex;
-    flex-direction: row; /* Кнопки в строку */
+    flex-wrap: wrap; /* Перенос кнопок на новую строку, если не помещаются */
     justify-content: center; /* Кнопки по центру */
     gap: 10px; /* Отступы между кнопками */
     margin-bottom: 20px;
-    flex-wrap: wrap; /* Для мобильных устройств кнопки будут оборачиваться */
-    width: 100%; /* Контейнер растягивается на всю ширину */
-    max-width: 600px; /* Ограничим максимальную ширину контейнера */
+    max-width: 100%; /* Ограничим максимальную ширину */
+    width: 100%;
 }
 
 /* Стили для кнопок */
@@ -65,8 +65,9 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-    width: 160px; /* Ширина кнопки */
+    width: 160px; /* Установим фиксированную ширину кнопок */
     text-align: center; /* Текст по центру */
+    box-sizing: border-box; /* Включим отступы в ширину кнопки */
 }
 
 /* Стили для кнопки при наведении */
@@ -92,7 +93,7 @@ body {
     opacity: 0.7; /* Более прозрачный при наведении */
 }
 
-/* Модальные окна */
+/* Модальные окна (по умолчанию скрыты) */
 .modal {
     display: none;
     position: fixed;
@@ -104,6 +105,7 @@ body {
     background-color: rgba(0,0,0,0.4); /* Полупрозрачный черный фон */
 }
 
+/* Контент модального окна */
 .modal-content {
     background-color: white;
     margin: 15% auto;

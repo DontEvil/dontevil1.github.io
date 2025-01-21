@@ -55,6 +55,16 @@
         function closeMontage() {
             document.getElementById("montageModal").style.display = "none";
         }
+
+        // Закрытие модального окна при клике вне окна
+        window.onclick = function(event) {
+            if (event.target === document.getElementById("mfgModal")) {
+                closeMFG();
+            }
+            if (event.target === document.getElementById("montageModal")) {
+                closeMontage();
+            }
+        }
     </script>
 
 </body>
