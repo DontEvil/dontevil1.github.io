@@ -46,9 +46,13 @@ body {
 /* Стили для колонок с кнопками */
 .button-column {
     display: flex;
-    justify-content: center; /* Кнопки в строку */
+    flex-direction: row; /* Кнопки в строку */
+    justify-content: center; /* Кнопки по центру */
     gap: 10px; /* Отступы между кнопками */
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Для мобильных устройств кнопки будут оборачиваться */
+    width: 100%; /* Контейнер растягивается на всю ширину */
+    max-width: 600px; /* Ограничим максимальную ширину контейнера */
 }
 
 /* Стили для кнопок */
@@ -61,7 +65,8 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-    width: 200px; /* Ширина кнопки */
+    width: 160px; /* Ширина кнопки */
+    text-align: center; /* Текст по центру */
 }
 
 /* Стили для кнопки при наведении */
@@ -121,4 +126,16 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+    .button {
+        width: 140px; /* Уменьшаем ширину кнопок на мобильных устройствах */
+        font-size: 12px; /* Меньше шрифт на мобильных устройствах */
+    }
+
+    .content-container {
+        padding: 20px; /* Увеличиваем отступы на мобильных устройствах */
+    }
 }
