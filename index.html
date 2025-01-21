@@ -18,30 +18,21 @@
 
         <!-- Кнопки -->
         <div class="button-column">
-            <div class="button-row">
-                <button class="button" id="mfg-btn"><i class="fas fa-download"></i> MFG 1.0</button>
-                <button class="button" id="montage-btn"><i class="fas fa-video"></i> Монтаж</button>
-            </div>
-            <div class="button-row">
-                <button class="button" id="store-btn"><i class="fas fa-store"></i> Магазин еще обновляется ;)</button>
-                <button class="button" id="info-btn"><i class="fas fa-info-circle"></i> Информация</button>
-            </div>
+            <button class="button" id="mfg-btn"><i class="fas fa-download"></i> MFG 1.0</button>
+            <button class="button" id="montage-btn"><i class="fas fa-video"></i> Монтаж</button>
+            <button class="button" id="info-btn"><i class="fas fa-info-circle"></i> Информация</button>
+            <button class="button" id="store-btn" disabled><i class="fas fa-store"></i> Магазин</button>
         </div>
     </div>
 
     <!-- Модальные окна для кнопок -->
-    <div id="modal-store" class="modal">
-        <div class="modal-content">
-            <h2>Магазин</h2>
-            <p>Магазин еще обновляется. Ожидайте новых обновлений!</p>
-        </div>
-    </div>
-
     <div id="modal-mfg" class="modal">
         <div class="modal-content">
             <h2>MFG 1.0</h2>
             <p>Скачайте MFG 1.0 по следующей ссылке:</p>
             <a href="https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view" target="_blank" class="button">Скачать MFG 1.0</a>
+            <!-- Новая кнопка Видео-Обзор -->
+            <a href="https://www.youtube.com/watch?v=7kPGXcr_eyE&ab_channel=DONTEVIL" target="_blank" class="button">Видео-Обзор 📹</a>
         </div>
     </div>
 
@@ -50,19 +41,17 @@
             <h2>Монтаж</h2>
             <p>Скачайте бесплатный пак для монтажа:</p>
             <a href="https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing" target="_blank" class="button">Скачать пак</a>
+            <!-- Новая кнопка Гайд -->
+            <a href="https://youtu.be/80sqLOeaIK4" target="_blank" class="button">Гайд 🎥</a>
         </div>
     </div>
 
-    <div id="modal-info" class="modal"> <!-- Модальное окно с информацией -->
+    <div id="modal-info" class="modal">
         <div class="modal-content">
             <h2>Информация</h2>
-            <p>Бот будет дорабатываться со временем, спасибо что пользуетесь <3</p>
-            <p>Предлагайте свои идеи в основном телеграмм канале для улучшения бота.</p>
+            <p>Бот будет дорабатываться со временем, спасибо что пользуетесь <3 Предлагайте свои идеи в основном телеграмм канале для улучшения бота.</p>
         </div>
     </div>
-
-    <!-- Добавляем элемент audio для звука -->
-    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>
 </body>

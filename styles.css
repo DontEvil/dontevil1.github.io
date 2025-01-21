@@ -52,7 +52,13 @@ body::before {
     margin: 40px auto;
     object-fit: cover;
     cursor: pointer;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Добавим анимацию на трансформацию и тень */
+}
+
+/* Эффект при наведении на картинку */
+.character-image:hover {
+    transform: scale(1.1) rotate(5deg); /* Увеличение картинки и легкое вращение */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Добавим красивую тень */
 }
 
 /* Стили для кнопок */
@@ -63,68 +69,61 @@ body::before {
     margin-top: 30px;
 }
 
-/* Стили для строк кнопок */
-.button-row {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
 .button {
     padding: 12px 20px;
-    background-color: #00aaff;  /* Голубой цвет */
+    background-color: #00bfff; /* Ярко голубой цвет для кнопок */
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: 50px; /* Округлая форма кнопки */
     font-size: 18px;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease;
     width: 100%;
+    position: relative;
+    text-align: center; /* Убедимся, что текст будет по центру */
 }
 
-/* Hover и active для кнопок */
+/* Кнопка "Магазин" */
+#store-btn {
+    background-color: #ffffff; /* Белый цвет для кнопки Магазин */
+    color: #aaa; /* Немного серый цвет для текста */
+    cursor: not-allowed; /* Отключаем возможность клика */
+    box-shadow: none; /* Убираем анимацию */
+}
+
+/* Кнопки "MFG 1.0", "Монтаж", "Информация" */
+#mfg-btn,
+#montage-btn,
+#info-btn {
+    background-color: #00bfff; /* Ярко голубой цвет для всех кнопок */
+}
+
+/* Кнопки при наведении */
 .button:hover {
-    background-color: #0088cc;  /* Темнее голубой при наведении */
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);  /* Добавление тени при наведении */
-}
-
-.button:active {
-    background-color: #007bb5;  /* Еще темнее при нажатии */
-    transform: scale(0.95);
-}
-
-/* Анимация пульсации (работает только при наведении) */
-.button:hover {
-    animation: pulse 1s infinite; /* Пульсация при наведении */
-}
-
-/* Анимация пульсации */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05); /* Легкое увеличение */
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.button i {
-    margin-right: 10px;
-    transition: transform 0.3s, color 0.3s;
+    background-color: #009acd; /* Цвет кнопок при наведении */
+    transform: translateY(-5px) scale(1.05); /* Подъем кнопки вверх и легкое увеличение */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
 }
 
 /* Анимация для иконок */
-.button i:hover {
-    transform: rotate(360deg) scale(1.5);
-    color: #ff5733;
+.button i {
+    margin-right: 10px;
+    transition: transform 0.3s, color 0.3s; /* Анимация для иконок */
+}
+
+/* Эффект при наведении на иконки */
+.button:hover i {
+    transform: rotate(360deg) scale(1.3); /* Вращение и увеличение иконки */
+    color: #ff5733; /* Цвет иконки при наведении */
+}
+
+/* Убираем подчеркивание у ссылок */
+a {
+    text-decoration: none;
 }
 
 /* Модальные окна */
@@ -166,6 +165,11 @@ body::before {
     margin-bottom: 20px;
 }
 
+/* Добавим отступы между кнопками Видео-Обзор и Скачать */
+.modal-content .button + .button {
+    margin-top: 15px; /* Добавим отступ */
+}
+
 /* Мобильная версия */
 @media (max-width: 600px) {
     .character-image {
@@ -176,11 +180,6 @@ body::before {
     .button-column {
         width: 100%;
         margin-top: 20px;
-    }
-
-    .button-row {
-        flex-direction: column;
-        gap: 15px;
     }
 
     .button {
