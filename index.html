@@ -6,31 +6,25 @@
     <title>GTA 5 Bot</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <!-- Подключение AOS для анимаций -->
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio> <!-- Звук клика -->
 </head>
 <body>
-
-    <!-- Кнопка для переключения темы -->
-    <button id="theme-toggle" class="theme-toggle">🌙/🌞</button>
 
     <!-- Контейнер для всего контента -->
     <div class="content-container">
         <!-- Контейнер для изображения -->
         <div class="image-container">
-            <img src="character.png" alt="GTA Character" class="character-image" id="character-image" data-aos="fade-up">
+            <img src="character.png" alt="GTA Character" class="character-image" id="character-image">
         </div>
 
         <!-- Кнопки -->
         <div class="button-column">
-            <button class="button tooltip" data-tooltip="Перейти в магазин" id="store-btn"><i class="fas fa-store"></i> Магазин</button>
-            <button class="button tooltip" data-tooltip="Скачать MFG 1.0" id="mfg-btn"><i class="fas fa-download"></i> MFG 1.0</button>
-            <button class="button tooltip" data-tooltip="Скачать монтажный пак" id="montage-btn"><i class="fas fa-video"></i> Монтаж</button>
+            <button class="button" id="store-btn"><i class="fas fa-store"></i> Магазин</button>
+            <button class="button" id="mfg-btn"><i class="fas fa-download"></i> MFG 1.0</button>
+            <button class="button" id="montage-btn"><i class="fas fa-video"></i> Монтаж</button>
         </div>
     </div>
 
-    <!-- Модальные окна -->
+    <!-- Модальные окна для кнопок -->
     <div id="modal-store" class="modal">
         <div class="modal-content">
             <h2>Магазин</h2>
@@ -54,6 +48,9 @@
             <a href="https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing" target="_blank" class="button">Скачать пак</a>
         </div>
     </div>
+
+    <!-- Добавляем элемент audio для звука -->
+    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
 
     <script src="script.js"></script>
 </body>

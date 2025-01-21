@@ -1,18 +1,26 @@
 // Функции для открытия модальных окон
-document.getElementById('store-btn').addEventListener('click', function() {
+document.getElementById('store-btn')?.addEventListener('click', function() {
+    playClickSound();  // Воспроизводим звук при нажатии
     document.getElementById('modal-store').style.display = 'flex';
-    document.getElementById('click-sound').play();
 });
 
-document.getElementById('mfg-btn').addEventListener('click', function() {
+document.getElementById('mfg-btn')?.addEventListener('click', function() {
+    playClickSound();  // Воспроизводим звук при нажатии
     document.getElementById('modal-mfg').style.display = 'flex';
-    document.getElementById('click-sound').play();
 });
 
-document.getElementById('montage-btn').addEventListener('click', function() {
+document.getElementById('montage-btn')?.addEventListener('click', function() {
+    playClickSound();  // Воспроизводим звук при нажатии
     document.getElementById('modal-montage').style.display = 'flex';
-    document.getElementById('click-sound').play();
 });
+
+// Функция для воспроизведения звука
+function playClickSound() {
+    const sound = document.getElementById('click-sound');
+    sound.currentTime = 0; // Сбрасываем время воспроизведения на начало
+    sound.volume = 0.3;     // Устанавливаем громкость на 30% (0.0 - 1.0)
+    sound.play();
+}
 
 // Функция для закрытия модальных окон
 document.querySelectorAll('.modal').forEach(modal => {
@@ -23,23 +31,15 @@ document.querySelectorAll('.modal').forEach(modal => {
     });
 });
 
-// Переключение между ночным и дневным режимами
-document.getElementById('theme-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('night');
-    document.querySelectorAll('.button').forEach(button => {
-        button.classList.toggle('night');
-    });
-});
-
-// Функция для вращения картинки на 720 градусов
+// Функция для вращения картинки на 720 градусов и перехода на Telegram канал
 document.getElementById('character-image').addEventListener('click', function() {
+    // Вращаем картинку на 720 градусов
     this.style.transform = 'rotate(720deg)';
     this.style.transition = 'transform 0.5s ease-in-out';
-    
-    setTimeout(() => {
-        this.style.transform = 'rotate(0deg)';
-    }, 500); // 500ms - время анимации
-});
+    this.style.transformOrigin = 'center center'; // Устанавливаем точку вращения в центр
 
-// Инициализация AOS для анимаций при прокрутке
-AOS.init();
+    // После завершения анимации (0.5s) переходим по ссылке
+    setTimeout(() => {
+        window.location.href = 'https://t.me/dontev1l'; // Переход на твой Telegram канал
+    }, 500); // 500ms - время, равное продолжительности анимации
+});
