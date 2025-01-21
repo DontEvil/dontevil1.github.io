@@ -3,54 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA 5 Bot</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
+    <title>Web App</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <!-- Контейнер с контентом -->
     <div class="content-container">
-
-        <!-- Круг с изображением -->
+        <!-- Картинка в круге -->
         <div class="image-container">
             <img src="character.png" alt="Character" class="character-img">
         </div>
 
         <!-- Кнопки -->
         <div class="button-column">
-            <button class="button" onclick="showMFG()">MFG 1.0</button>
-            <button class="button" onclick="showMontage()">Монтаж</button>
-            <button class="button" onclick="showShop()">Магазин</button>
+            <button class="button" id="store-btn">Магазин</button>
+            <button class="button" id="mfg-btn">MFG 1.0</button>
+            <button class="button" id="montage-btn">Монтаж</button>
         </div>
 
-        <!-- Скрытые кнопки для MFG 1.0 и Монтаж -->
-        <div id="mfg-container" style="display:none;">
-            <button class="button download-btn" onclick="window.open('https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view', '_blank')">Скачать</button>
+        <!-- Кнопки для скачивания -->
+        <div id="mfg-download" style="display:none;">
+            <button class="download-btn" onclick="window.open('https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view')">Скачать MFG 1.0</button>
         </div>
 
-        <div id="montage-container" style="display:none;">
-            <button class="button download-btn" onclick="window.open('https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing', '_blank')">Скачать бесплатный пак для монтажа</button>
+        <div id="montage-download" style="display:none;">
+            <button class="download-btn" onclick="window.open('https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing')">Скачать бесплатный пак для монтажа</button>
         </div>
-
     </div>
 
     <script>
-        // Функции для отображения кнопок
-        function showMFG() {
-            document.getElementById("mfg-container").style.display = "block";
-            document.getElementById("montage-container").style.display = "none";
-        }
+        document.getElementById('mfg-btn').addEventListener('click', function() {
+            document.getElementById('mfg-download').style.display = 'block';
+            document.getElementById('montage-download').style.display = 'none';
+        });
 
-        function showMontage() {
-            document.getElementById("montage-container").style.display = "block";
-            document.getElementById("mfg-container").style.display = "none";
-        }
+        document.getElementById('montage-btn').addEventListener('click', function() {
+            document.getElementById('montage-download').style.display = 'block';
+            document.getElementById('mfg-download').style.display = 'none';
+        });
 
-        function showShop() {
-            document.getElementById("mfg-container").style.display = "none";
-            document.getElementById("montage-container").style.display = "none";
-        }
+        document.getElementById('store-btn').addEventListener('click', function() {
+            alert("Магазин откроется позже!");
+        });
     </script>
-
 </body>
 </html>

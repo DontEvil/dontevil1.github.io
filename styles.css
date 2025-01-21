@@ -28,8 +28,8 @@ body {
 .image-container {
     background-color: #fff;
     border-radius: 50%;
-    width: 100px; /* Размер картинки */
-    height: 100px; /* Размер картинки */
+    width: 120px; /* Размер картинки в круге */
+    height: 120px; /* Размер картинки в круге */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,7 +38,7 @@ body {
 }
 
 .character-img {
-    width: 100%;
+    width: 100%; /* Делаем изображение, чтобы оно полностью занимало круг */
     height: 100%;
     object-fit: cover; /* Сохраняем пропорции изображения */
 }
