@@ -71,32 +71,19 @@ body {
     background-color: #444;
 }
 
-/* Стили для колонки с текстом снизу */
-.text-column {
-    background-color: rgba(128, 128, 128, 0.7); /* Серый полупрозрачный фон */
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 20px;
-    width: 200px; /* Ширина колонки */
-    text-align: center;
-    color: #4CAF50; /* Зеленый текст */
-    font-size: 18px;
-}
-
-.text-column p {
-    margin: 10px 0;
-}
-
 /* Стили для футера */
 .footer {
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     color: white;
     position: fixed;
     bottom: 0;
     width: 100%;
     background-color: #000; /* Черный фон */
-    padding: 10px 0;
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: background-color 0.3s ease; /* Плавное изменение фона */
 }
 
@@ -112,17 +99,12 @@ body {
         font-size: 14px;
     }
 
-    .text-column {
-        width: 150px;
-        font-size: 16px;
-    }
-
     .character-circle {
         width: 130px;
         height: 130px;
     }
 
     .footer {
-        font-size: 10px;
+        font-size: 12px;
     }
 }
