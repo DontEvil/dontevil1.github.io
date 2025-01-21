@@ -22,25 +22,6 @@ body {
     width: 100%;
 }
 
-/* Стили для верхней части экрана с именем пользователя и сердечком */
-.user-info {
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
-.user-info #username {
-    margin-right: 10px;
-}
-
-.user-info span {
-    font-size: 24px;
-    margin-left: 5px;
-}
-
 /* Основной контент (панельки и изображение) */
 .main-content {
     display: flex;
@@ -95,10 +76,6 @@ body {
 
 /* Мобильная версия */
 @media (max-width: 600px) {
-    .user-info {
-        font-size: 18px;
-    }
-
     .panel-buttons button {
         padding: 10px;
         font-size: 14px;
