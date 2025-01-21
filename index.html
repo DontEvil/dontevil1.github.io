@@ -1,38 +1,104 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTA 5 Bot</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Стили для всего документа */
+        body {
+            background-color: #000000; /* Черный фон */
+            color: white; /* Белый текст */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Стили для шапки */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            font-size: 20px;
+            align-items: center;
+        }
+        
+        .header .username {
+            display: flex;
+            align-items: center;
+        }
+
+        .header .username span {
+            margin-left: 10px;
+        }
+        
+        .header .heart {
+            font-size: 25px;
+            color: red;
+        }
+
+        /* Стили для меню */
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding: 20px;
+        }
+
+        .menu button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .menu button:hover {
+            background-color: #666;
+        }
+
+        /* Стили для изображения персонажа */
+        .character {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Стили для футера */
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
-        <!-- Верхняя панель с никнеймом пользователя и сердечком -->
-        <header>
-            <div class="user-info">
-                <span id="username">Никнейм пользователя</span>
-                <span id="heart">❤️</span>
-            </div>
-            <div class="footer-text">
-                <span>@MadeForGTABot</span>
-            </div>
-        </header>
 
-        <!-- Панели с кнопками -->
-        <div class="panel-buttons">
-            <button class="panel-button" id="redux-btn">Редукс</button>
-            <button class="panel-button" id="montage-btn">Монтаж</button>
-            <button class="panel-button" id="preview-btn">Превью</button>
+    <!-- Шапка с никнеймом и сердечком -->
+    <div class="header">
+        <div class="username">
+            <span id="username">UserName</span>
         </div>
-
-        <!-- Изображение персонажа GTA -->
-        <div class="character-img">
-            <img src="gta_character.png" alt="Character" />
-        </div>
+        <div class="heart">❤️</div>
     </div>
 
-    <!-- Подключение JS -->
-    <script src="script.js"></script>
+    <!-- Меню с кнопками -->
+    <div class="menu">
+        <button>Редукс</button>
+        <button>Монтаж</button>
+        <button>Превью</button>
+    </div>
+
+    <!-- Изображение персонажа -->
+    <img src="character.png" alt="GTA Character" class="character">
+
+    <!-- Футер с текстом -->
+    <div class="footer">
+        <p>@MadeForGTABot</p>
+    </div>
+
 </body>
 </html>
