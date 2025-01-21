@@ -1,148 +1,105 @@
-/* Основной стиль для всего приложения */
-body {
+/* Общие стили */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Arial', sans-serif;
-    background: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif') no-repeat center center fixed;
-    background-size: cover; /* Для правильного растягивания фона */
-    color: white; /* Белый текст */
+    background-image: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
     height: 100vh;
-    padding: 10px;
-    box-sizing: border-box; /* Для правильных отступов */
-}
-
-/* Контейнер для всех элементов (кроме кнопок) */
-.content-container {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    width: 100%;
-    height: 100%;
-    padding-bottom: 100px; /* Ставим отступ снизу, чтобы кнопки не перекрывали контент */
-    z-index: 1; /* Убедимся, что все элементы будут поверх фона */
-}
-
-/* Картинка в круге */
-.image-container {
-    background-color: #fff;
-    border-radius: 50%;
-    width: 120px; /* Размер картинки в круге */
-    height: 120px; /* Размер картинки в круге */
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
-    margin-bottom: 20px;
 }
 
-.character-img {
-    width: 100%; /* Делаем изображение, чтобы оно полностью занимало круг */
-    height: 100%;
-    object-fit: cover; /* Сохраняем пропорции изображения */
-}
-
-/* Кнопки закрепленные внизу */
-.button-column {
-    display: flex;
-    justify-content: center; /* Кнопки по центру */
-    gap: 10px; /* Отступы между кнопками */
-    position: fixed;
-    bottom: 20px; /* Отступ от низа экрана */
-    left: 50%;
-    transform: translateX(-50%); /* Центрируем кнопки по горизонтали */
-    margin-top: 20px;
+/* Контейнер с контентом */
+.content-container {
     width: 100%;
-    z-index: 2; /* Убедимся, что кнопки будут поверх контента */
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Стили для картинки */
+.character-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 40px auto;
+    object-fit: cover;
 }
 
 /* Стили для кнопок */
-.button {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 18px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-    width: 160px; /* Установим фиксированную ширину кнопок */
-    text-align: center; /* Текст по центру */
-    box-sizing: border-box; /* Включим отступы в ширину кнопки */
-}
-
-/* Стили для кнопки при наведении */
-.button:hover {
-    background-color: #6c757d; /* Серый цвет */
-    opacity: 0.7; /* Более прозрачный при наведении */
-    transform: translateY(-3px); /* Легкое поднятие кнопки */
-}
-
-/* Стили для кнопки скачивания */
-.download-btn {
-    background-color: #007bff;
-    color: white;
-    font-size: 14px;
-    padding: 8px 16px;
-    width: 220px; /* Ширина кнопки скачивания */
-    border-radius: 8px;
-}
-
-.download-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
-    opacity: 0.7; /* Более прозрачный при наведении */
-}
-
-/* Модальные окна (по умолчанию скрыты) */
-.modal {
-    display: none;
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin-top: 30px;
     position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.button {
+    padding: 12px 20px;
+    background-color: #555;  /* Цвет кнопок по умолчанию */
+    color: #fff;
+    border: 2px solid #555;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.4); /* Полупрозрачный черный фон */
 }
 
-/* Контент модального окна */
-.modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: 20px;
-    border-radius: 10px;
-    width: 80%; /* Ширина окна */
-    text-align: center;
+/* Эффект при наведении на кнопки */
+.button:hover {
+    background-color: rgba(85, 85, 85, 0.6); /* Более прозрачный серый цвет */
+    transform: scale(1.05);
 }
 
-/* Кнопка закрытия */
-.close {
-    color: #aaa;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
+.button:active {
+    background-color: #444;
+    color: #fff;
+    transform: scale(0.95);
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+/* Иконки на кнопках */
+.button-icon {
+    font-size: 20px;
+    margin-right: 10px;
 }
 
 /* Мобильная версия */
-@media (max-width: 768px) {
-    .button {
-        width: 140px; /* Уменьшаем ширину кнопок на мобильных устройствах */
-        font-size: 12px; /* Меньше шрифт на мобильных устройствах */
+@media (max-width: 600px) {
+    .character-image {
+        width: 120px;
+        height: 120px;
     }
 
-    .content-container {
-        padding: 20px; /* Увеличиваем отступы на мобильных устройствах */
+    .button-row {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .button {
+        padding: 12px 15px;
+        font-size: 16px;
     }
 }
