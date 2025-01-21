@@ -56,6 +56,29 @@ body {
     background-color: #444;
 }
 
+/* Стили для новых кнопок */
+.additional-buttons {
+    display: flex;
+    flex-direction: column; /* Колонки для кнопок */
+    gap: 10px; /* Расстояние между кнопками */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+.additional-buttons button {
+    background-color: #4CAF50; /* Зеленый цвет */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.additional-buttons button:hover {
+    background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
 /* Стили для нижнего текста */
 .footer {
     font-size: 12px;
@@ -69,6 +92,11 @@ body {
 /* Мобильная версия */
 @media (max-width: 600px) {
     .menu button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .additional-buttons button {
         padding: 10px;
         font-size: 14px;
     }
