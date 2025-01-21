@@ -10,16 +10,7 @@ body {
     justify-content: center; /* Центрирование по вертикали */
     height: 100vh;
     padding: 10px;
-}
-
-/* Контейнер для всего контента */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
+    text-align: center; /* Выравнивание текста по центру */
 }
 
 /* Круглый контейнер для изображения персонажа */
@@ -32,6 +23,7 @@ body {
     justify-content: center; /* Выравнивание по горизонтали */
     overflow: hidden; /* Обрезаем изображение, если оно выходит за круг */
     margin-bottom: 20px; /* Отступ снизу */
+    border: 3px solid #fff; /* Добавляем обводку */
 }
 
 /* Изображение персонажа */
@@ -41,27 +33,26 @@ body {
     object-fit: cover; /* Сохраняем пропорции изображения */
 }
 
-/* Стили для кнопок/панелей в главной части */
-.panel-buttons {
+/* Стили для кнопок */
+.menu {
     display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 40px;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.panel-buttons button {
+.menu button {
     background-color: #222;
     color: white;
     border: 1px solid #555;
     border-radius: 5px;
-    padding: 15px;
-    width: 100px;
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-.panel-buttons button:hover {
+.menu button:hover {
     background-color: #444;
 }
 
@@ -77,7 +68,7 @@ body {
 
 /* Мобильная версия */
 @media (max-width: 600px) {
-    .panel-buttons button {
+    .menu button {
         padding: 10px;
         font-size: 14px;
     }
@@ -85,11 +76,6 @@ body {
     .character-circle {
         width: 150px;
         height: 150px;
-    }
-
-    .character {
-        width: 100%;
-        height: 100%;
     }
 
     .footer {
