@@ -63,40 +63,65 @@ body::before {
     margin-top: 30px;
 }
 
+/* Стили для строк кнопок */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .button {
     padding: 12px 20px;
-    background-color: #28a745;
+    background-color: #00aaff;  /* Голубой цвет */
     color: white;
     border: none;
     border-radius: 50px;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Изначальная тень */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s ease-in-out;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
     width: 100%;
 }
 
-/* Добавляем эффект тени при наведении */
+/* Hover и active для кнопок */
 .button:hover {
-    background-color: #218838;
-    transform: scale(1.05); /* Легкое увеличение */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+    background-color: #0088cc;  /* Темнее голубой при наведении */
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);  /* Добавление тени при наведении */
 }
 
 .button:active {
-    background-color: #1e7e34;
-    transform: scale(0.95); /* Сужаем кнопку при нажатии */
+    background-color: #007bb5;  /* Еще темнее при нажатии */
+    transform: scale(0.95);
 }
 
-/* Анимация для иконок в кнопках */
+/* Анимация пульсации (работает только при наведении) */
+.button:hover {
+    animation: pulse 1s infinite; /* Пульсация при наведении */
+}
+
+/* Анимация пульсации */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Легкое увеличение */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .button i {
     margin-right: 10px;
     transition: transform 0.3s, color 0.3s;
 }
 
+/* Анимация для иконок */
 .button i:hover {
     transform: rotate(360deg) scale(1.5);
     color: #ff5733;
@@ -151,6 +176,11 @@ body::before {
     .button-column {
         width: 100%;
         margin-top: 20px;
+    }
+
+    .button-row {
+        flex-direction: column;
+        gap: 15px;
     }
 
     .button {
