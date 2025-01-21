@@ -1,13 +1,19 @@
-// Функции для открытия модальных окон
+// Получаем элемент аудио
+const clickSound = document.getElementById('click-sound');
+
+// Функции для открытия модальных окон и воспроизведения звука
 document.getElementById('mfg-btn').addEventListener('click', function() {
+    clickSound.play();  // Воспроизводим звук
     document.getElementById('modal-mfg').style.display = 'flex';
 });
 
 document.getElementById('montage-btn').addEventListener('click', function() {
+    clickSound.play();  // Воспроизводим звук
     document.getElementById('modal-montage').style.display = 'flex';
 });
 
 document.getElementById('info-btn').addEventListener('click', function() {
+    clickSound.play();  // Воспроизводим звук
     document.getElementById('modal-info').style.display = 'flex';
 });
 

@@ -71,17 +71,18 @@ body::before {
 
 .button {
     padding: 12px 20px;
-    background-color: #00bfff; /* Ярко голубой цвет для кнопок */
+    background-color: #000000; /* Черный цвет для кнопок */
     color: white;
     border: none;
     border-radius: 50px; /* Округлая форма кнопки */
     font-size: 18px;
+    font-family: 'Source Sans Pro', sans-serif; /* Применяем шрифт Source Sans Pro Medium 500 */
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease;
+    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease, opacity 0.4s ease;
     width: 100%;
     position: relative;
     text-align: center; /* Убедимся, что текст будет по центру */
@@ -99,14 +100,15 @@ body::before {
 #mfg-btn,
 #montage-btn,
 #info-btn {
-    background-color: #00bfff; /* Ярко голубой цвет для всех кнопок */
+    background-color: #000000; /* Черный цвет для всех кнопок */
 }
 
 /* Кнопки при наведении */
 .button:hover {
-    background-color: #009acd; /* Цвет кнопок при наведении */
+    background-color: #333333; /* Цвет кнопок при наведении */
     transform: translateY(-5px) scale(1.05); /* Подъем кнопки вверх и легкое увеличение */
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+    opacity: 0.8; /* Сделаем кнопки более прозрачными при наведении */
 }
 
 /* Анимация для иконок */
