@@ -20,7 +20,7 @@ def main():
     application.add_handler(CommandHandler("start", start))
 
     # Запускаем бота с использованием встроенной асинхронности
-    application.run_polling()
+    application.run_polling()  # Это будет работать, как асинхронный запрос
 
 if __name__ == "__main__":
     main()
