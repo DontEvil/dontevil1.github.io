@@ -1,26 +1,32 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from telegram.ext import Application, CommandHandler
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import Application
 
-# Обработчик команды /start
-async def start(update, context):
-    keyboard = [
-        [
-            InlineKeyboardButton("Open Web App", web_app=WebAppInfo(url="https://dontevil.github.io/dontevil1.github.io/"))
-        ]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text("Hello! Click the button below to open the Web App:", reply_markup=reply_markup)
+# Этот токен необходимо заменить на токен вашего бота
+TOKEN = '7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA'
 
-# Главная функция
+# Команда start для получения данных о пользователе
+async def start(update: Update, context: CallbackContext) -> None:
+    user = update.effective_user
+    name = user.first_name  # Имя пользователя Telegram
+    username = user.username  # Никнейм пользователя
+
+    # Формируем URL с параметрами
+    url = f"https://dontevil.github.io/dontevil1.github.io?username={username}&name={name}"
+
+    # Отправляем ссылку в чат
+    await update.message.reply_text(f"Привет, {name}! Перейди по ссылке: {url}")
+
+# Основная функция для запуска бота
 def main():
-    # Создаем объект приложения и передаем токен
-    application = Application.builder().token("7266775254:AAEvHJqDPcE1IzSnvDigrjZ8IUY3vdWbjyA").build()
+    # Создаем объект приложения
+    application = Application.builder().token(TOKEN).build()
 
-    # Добавляем обработчик команды /start
+    # Регистрируем обработчик для команды start
     application.add_handler(CommandHandler("start", start))
 
-    # Запускаем бота с использованием встроенной асинхронности
+    # Запуск бота
     application.run_polling()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
