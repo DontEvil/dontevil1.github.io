@@ -71,62 +71,32 @@ body::before {
     border-radius: 50px;
     font-size: 18px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Изначальная тень */
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s ease-in-out;
     width: 100%;
 }
 
-/* Разные кнопки */
-#store-btn {
-    background-color: #007bff;
-}
-
-#mfg-btn {
-    background-color: #17a2b8;
-}
-
-#montage-btn {
-    background-color: #ffc107;
-}
-
-/* Hover и active для кнопок */
+/* Добавляем эффект тени при наведении */
 .button:hover {
     background-color: #218838;
-    transform: scale(1.05);
+    transform: scale(1.05); /* Легкое увеличение */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
 }
 
 .button:active {
     background-color: #1e7e34;
-    transform: scale(0.95);
+    transform: scale(0.95); /* Сужаем кнопку при нажатии */
 }
 
-/* Анимация пульсации (работает только при наведении) */
-.button:hover {
-    animation: pulse 1s infinite; /* Пульсация при наведении */
-}
-
-/* Анимация пульсации */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05); /* Легкое увеличение */
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
+/* Анимация для иконок в кнопках */
 .button i {
     margin-right: 10px;
     transition: transform 0.3s, color 0.3s;
 }
 
-/* Анимация для иконок */
 .button i:hover {
     transform: rotate(360deg) scale(1.5);
     color: #ff5733;

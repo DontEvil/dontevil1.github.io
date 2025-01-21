@@ -14,6 +14,11 @@ document.getElementById('montage-btn')?.addEventListener('click', function() {
     document.getElementById('modal-montage').style.display = 'flex';
 });
 
+document.getElementById('info-btn')?.addEventListener('click', function() { // Для кнопки "Информация"
+    playClickSound();  // Воспроизводим звук при нажатии
+    document.getElementById('modal-info').style.display = 'flex';
+});
+
 // Функция для воспроизведения звука
 function playClickSound() {
     const sound = document.getElementById('click-sound');
