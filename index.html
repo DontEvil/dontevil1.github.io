@@ -4,24 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTA 5 Bot</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключаем правильный CSS файл -->
+    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
 </head>
 <body>
 
-    <!-- Основной контент -->
-    <div class="container">
-        <!-- Круглый контейнер для изображения персонажа -->
-        <div class="character-circle">
-            <img src="character.png" alt="Character" class="character">
+    <!-- Контейнер с контентом -->
+    <div class="content-container">
+
+        <!-- Круг с изображением -->
+        <div class="image-container">
+            <img src="character.png" alt="Character" class="character-img">
         </div>
+
+        <!-- Кнопки -->
+        <div class="button-column">
+            <button class="button" onclick="showMFG()">MFG 1.0</button>
+            <button class="button" onclick="showMontage()">Монтаж</button>
+            <button class="button" onclick="showShop()">Магазин</button>
+        </div>
+
+        <!-- Скрытые кнопки для MFG 1.0 и Монтаж -->
+        <div id="mfg-container" style="display:none;">
+            <button class="button download-btn" onclick="window.open('https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view', '_blank')">Скачать</button>
+        </div>
+
+        <div id="montage-container" style="display:none;">
+            <button class="button download-btn" onclick="window.open('https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing', '_blank')">Скачать бесплатный пак для монтажа</button>
+        </div>
+
     </div>
 
-    <!-- Кнопки внизу страницы (футер) -->
-    <div class="footer">
-        <button class="green-button">Бесплатный пак</button>
-        <button class="green-button">Редукс MFG 1.0 🔥</button>
-        <button class="green-button">Все для монтажа</button>
-    </div>
+    <script>
+        // Функции для отображения кнопок
+        function showMFG() {
+            document.getElementById("mfg-container").style.display = "block";
+            document.getElementById("montage-container").style.display = "none";
+        }
+
+        function showMontage() {
+            document.getElementById("montage-container").style.display = "block";
+            document.getElementById("mfg-container").style.display = "none";
+        }
+
+        function showShop() {
+            document.getElementById("mfg-container").style.display = "none";
+            document.getElementById("montage-container").style.display = "none";
+        }
+    </script>
 
 </body>
 </html>
