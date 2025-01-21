@@ -16,6 +16,7 @@ body {
     background-size: cover; /* Заполняем весь экран фоном */
     background-position: center; /* Центрируем GIF */
     background-attachment: fixed; /* Закрепляем фон, чтобы он не прокручивался */
+    overflow: hidden; /* Убираем прокрутку страницы */
 }
 
 /* Контейнер для всего контента */
@@ -26,7 +27,6 @@ body {
     justify-content: center;
     height: 100%;
     width: 100%;
-    margin-bottom: 150px; /* Оставляем место для футера с кнопками */
 }
 
 /* Круглый контейнер для изображения персонажа */
@@ -74,10 +74,10 @@ body {
 
 /* Стили для футера */
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: #000; /* Черный фон */
+    background-color: rgba(0, 0, 0, 0.6); /* Черный полупрозрачный фон */
     display: flex;
     justify-content: center;
     align-items: center;
