@@ -60,8 +60,8 @@ body {
 .additional-buttons {
     display: flex;
     flex-direction: column; /* Колонки для кнопок */
-    gap: 10px; /* Расстояние между кнопками */
-    margin-bottom: 20px; /* Отступ снизу */
+    gap: 15px; /* Расстояние между кнопками */
+    margin-top: 20px; /* Отступ сверху */
 }
 
 .additional-buttons button {
