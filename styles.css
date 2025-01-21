@@ -10,23 +10,23 @@ body {
     background-image: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed; /* Фон не будет двигаться при прокрутке */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     flex-direction: column;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden; /* Чтобы не было прокрутки */
 }
 
-/* Контейнер с контентом */
+/* Стили для контейнера контента */
 .content-container {
     width: 100%;
     max-width: 600px;
     text-align: center;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.9); /* Прозрачный белый фон */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
 }
@@ -37,56 +37,84 @@ body {
     height: 150px;
     border-radius: 50%;
     margin: 40px auto;
-    object-fit: cover;
+    object-fit: cover; /* Чтобы изображение не искажалось */
 }
 
 /* Стили для кнопок */
-.button-row {
+.button-column {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    flex-direction: column;
     gap: 20px;
     margin-top: 30px;
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
 }
 
 .button {
     padding: 12px 20px;
-    background-color: #555;  /* Цвет кнопок по умолчанию */
-    color: #fff;
-    border: 2px solid #555;
-    border-radius: 30px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 50px;
     font-size: 18px;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    width: 100%;
-    max-width: 180px; /* Ограничиваем ширину кнопки */
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%; /* Чтобы кнопки занимали всю ширину */
 }
 
-/* Эффект при наведении на кнопки */
 .button:hover {
-    background-color: rgba(85, 85, 85, 0.6); /* Более прозрачный серый цвет */
+    background-color: #218838;
     transform: scale(1.05);
 }
 
 .button:active {
-    background-color: #444;
-    color: #fff;
+    background-color: #1e7e34;
     transform: scale(0.95);
 }
 
-/* Иконки на кнопках */
-.button-icon {
-    font-size: 20px;
+.button i {
     margin-right: 10px;
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
 }
 
 /* Мобильная версия */
@@ -96,8 +124,7 @@ body {
         height: 120px;
     }
 
-    .button-row {
-        flex-direction: column;
+    .button-column {
         width: 100%;
         margin-top: 20px;
     }
@@ -105,7 +132,9 @@ body {
     .button {
         padding: 12px 15px;
         font-size: 16px;
-        width: 100%; /* Кнопки на мобильных устройствах занимают всю ширину */
-        max-width: none;
+    }
+
+    .modal-content {
+        width: 90%;
     }
 }
