@@ -1,99 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GTA 5 Bot</title>
-    <style>
-        /* Стили для всего документа */
-        body {
-            background-color: #000000; /* Черный фон */
-            color: white; /* Белый текст */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        
-        /* Стили для шапки */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            font-size: 20px;
-            align-items: center;
-        }
-        
-        .header .username {
-            display: flex;
-            align-items: center;
-        }
-
-        .header .username span {
-            margin-left: 10px;
-        }
-        
-        .header .heart {
-            font-size: 25px;
-            color: red;
-        }
-
-        /* Стили для меню */
-        .menu {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-            padding: 20px;
-        }
-
-        .menu button {
-            background-color: #444;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .menu button:hover {
-            background-color: #666;
-        }
-
-        /* Стили для изображения персонажа */
-        .character {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Стили для футера */
-        .footer {
-            text-align: center;
-            font-size: 10px;
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
 </head>
 <body>
 
     <!-- Шапка с никнеймом и сердечком -->
     <div class="header">
         <div class="username">
-            <span id="username">UserName</span>
+            <span id="username">UserName</span> <!-- Здесь будет имя пользователя -->
         </div>
-        <div class="heart">❤️</div>
+        <div class="heart">❤️</div> <!-- Сердечко рядом с именем -->
     </div>
 
-    <!-- Меню с кнопками -->
+    <!-- Панель с кнопками -->
     <div class="menu">
-        <button>Редукс</button>
-        <button>Монтаж</button>
-        <button>Превью</button>
+        <button id="redux">Редукс</button>
+        <button id="montage">Монтаж</button>
+        <button id="preview">Превью</button>
     </div>
 
-    <!-- Изображение персонажа -->
-    <img src="character.png" alt="GTA Character" class="character">
+    <!-- Изображение персонажа из GTA -->
+    <img src="character.png" alt="GTA Character" class="character"> <!-- Подставьте правильный путь к изображению персонажа -->
 
     <!-- Футер с текстом -->
     <div class="footer">
