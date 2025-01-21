@@ -3,47 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>GTA 5 Bot</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
 </head>
 <body>
+
+    <!-- Контейнер для всех элементов -->
     <div class="content-container">
         <!-- Картинка в круге -->
         <div class="image-container">
-            <img src="character.png" alt="Character" class="character-img">
+            <img src="character.png" alt="GTA Character" class="character-img"> <!-- Подставьте правильный путь к изображению -->
         </div>
 
         <!-- Кнопки -->
         <div class="button-column">
-            <button class="button" id="store-btn">Магазин</button>
-            <button class="button" id="mfg-btn">MFG 1.0</button>
-            <button class="button" id="montage-btn">Монтаж</button>
+            <button class="button" onclick="window.open('https://google.com')">Магазин</button>
+            <button class="button" onclick="openMFG()">MFG 1.0</button>
+            <button class="button" onclick="openMontage()">Монтаж</button>
         </div>
+    </div>
 
-        <!-- Кнопки для скачивания -->
-        <div id="mfg-download" style="display:none;">
+    <!-- Модальные окна для кнопок -->
+    <div id="mfgModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMFG()">&times;</span>
             <button class="download-btn" onclick="window.open('https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view')">Скачать MFG 1.0</button>
         </div>
+    </div>
 
-        <div id="montage-download" style="display:none;">
+    <div id="montageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMontage()">&times;</span>
             <button class="download-btn" onclick="window.open('https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing')">Скачать бесплатный пак для монтажа</button>
         </div>
     </div>
 
     <script>
-        document.getElementById('mfg-btn').addEventListener('click', function() {
-            document.getElementById('mfg-download').style.display = 'block';
-            document.getElementById('montage-download').style.display = 'none';
-        });
+        // Открытие модальных окон
+        function openMFG() {
+            document.getElementById("mfgModal").style.display = "block";
+        }
 
-        document.getElementById('montage-btn').addEventListener('click', function() {
-            document.getElementById('montage-download').style.display = 'block';
-            document.getElementById('mfg-download').style.display = 'none';
-        });
+        function closeMFG() {
+            document.getElementById("mfgModal").style.display = "none";
+        }
 
-        document.getElementById('store-btn').addEventListener('click', function() {
-            alert("Магазин откроется позже!");
-        });
+        function openMontage() {
+            document.getElementById("montageModal").style.display = "block";
+        }
+
+        function closeMontage() {
+            document.getElementById("montageModal").style.display = "none";
+        }
     </script>
+
 </body>
 </html>
