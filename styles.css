@@ -11,7 +11,7 @@ body {
     height: 100vh;
     padding: 10px;
     text-align: center; /* Выравнивание текста по центру */
-    background-image: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif'); /* Добавляем GIF как фон */
+    background-image: url('images/background.gif'); /* Указываем локальный путь к GIF */
     background-size: cover; /* Заполняем весь экран фоном */
     background-position: center; /* Центрируем GIF */
     background-attachment: fixed; /* Закрепляем фон, чтобы он не прокручивался */
