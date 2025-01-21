@@ -1,35 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA 5 Bot</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Подключаем CSS файл -->
+    <title>GTA Web App</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .footer {
+            font-size: 10px;
+            margin-top: 50px;
+        }
+        .user-info {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .heart {
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Шапка с никнеймом и сердечком -->
-    <div class="header">
-        <div class="username">
-            <span id="username">UserName</span> <!-- Здесь будет имя пользователя -->
-        </div>
-        <div class="heart">❤️</div> <!-- Сердечко рядом с именем -->
+    <div class="user-info">
+        <span>{{ name }}</span>
+        <span class="heart">❤️</span>
     </div>
-
-    <!-- Панель с кнопками -->
-    <div class="menu">
-        <button id="redux">Редукс</button>
-        <button id="montage">Монтаж</button>
-        <button id="preview">Превью</button>
-    </div>
-
-    <!-- Изображение персонажа из GTA -->
-    <img src="character.png" alt="GTA Character" class="character"> <!-- Подставьте правильный путь к изображению персонажа -->
-
-    <!-- Футер с текстом -->
     <div class="footer">
-        <p>@MadeForGTABot</p>
+        @MadeForGTABot
     </div>
-
 </body>
 </html>
