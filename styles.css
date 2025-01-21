@@ -30,8 +30,8 @@ body {
 
 /* Круглый контейнер для изображения персонажа */
 .character-circle {
-    width: 200px;  /* Ширина круга */
-    height: 200px; /* Высота круга */
+    width: 150px;  /* Уменьшаем круг */
+    height: 150px; /* Уменьшаем круг */
     border-radius: 50%; /* Делаем круг */
     display: flex;
     align-items: center; /* Выравнивание по вертикали */
@@ -110,8 +110,8 @@ body {
     }
 
     .character-circle {
-        width: 150px;
-        height: 150px;
+        width: 130px;
+        height: 130px;
     }
 
     .footer {
