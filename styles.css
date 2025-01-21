@@ -61,7 +61,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
-    width: 200px; /* Уменьшена ширина */
+    width: 200px; /* Ширина кнопки */
 }
 
 /* Стили для кнопки при наведении */
@@ -87,31 +87,4 @@ body {
     opacity: 0.7; /* Более прозрачный при наведении */
 }
 
-/* Мобильная версия */
-@media (max-width: 600px) {
-    .button {
-        font-size: 12px;
-        padding: 8px 15px;
-        width: 160px;
-    }
-
-    .download-btn {
-        font-size: 12px;
-        padding: 6px 12px;
-        width: 180px;
-    }
-
-    /* Для мобильных устройств: Картинка и кнопки будут того же размера */
-    .image-container {
-        width: 120px; /* Картинка в круге */
-        height: 120px; /* Картинка в круге */
-    }
-}
-
-/* Для ПК (ширина экрана больше 600px) */
-@media (min-width: 601px) {
-    .image-container {
-        width: 120px; /* Картинка в круге */
-        height: 120px; /* Картинка в круге */
-    }
-}
+/* Убираем специфические медиа-запросы для мобильных устройств и ПК */
