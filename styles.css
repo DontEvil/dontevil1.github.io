@@ -1,4 +1,3 @@
-/* Общие стили */
 * {
     margin: 0;
     padding: 0;
@@ -42,6 +41,7 @@ body::before {
     background-color: rgba(255, 255, 255, 0.6); /* Сделаем фон более прозрачным */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    z-index: 1; /* Убедимся, что контейнер контента выше модальных окон */
 }
 
 /* Стили для картинки */
@@ -71,15 +71,15 @@ body::before {
 
 /* Основные стили для кнопок */
 .button {
-    padding: 12px 20px;
-    background-color: #000000; /* Черный цвет для кнопок */
-    color: white;
-    border: none;
+    padding: 15px 25px;
+    background-color: #1e1e1e; /* Темный цвет для кнопок */
+    color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 50px; /* Округлая форма кнопки */
     font-size: 18px;
     font-family: 'Source Sans Pro', sans-serif; /* Применяем шрифт Source Sans Pro Medium 500 */
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -87,6 +87,37 @@ body::before {
     width: 100%;
     position: relative;
     text-align: center; /* Убедимся, что текст будет по центру */
+    overflow: hidden; /* Для анимации фона */
+    z-index: 1; /* Убедимся, что кнопки выше модальных окон */
+}
+
+/* Эффект волны для кнопок */
+.button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.75s;
+    border-radius: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.button i {
+    margin-right: 10px;
+    transition: transform 0.3s, color 0.3s; /* Анимация для иконок */
+    z-index: 1; /* Иконка и текст должны быть выше эффекта волны */
+}
+
+.button span {
+    z-index: 1; /* Текст должен быть выше эффекта волны */
 }
 
 /* Кнопка "Магазин" */
@@ -101,21 +132,15 @@ body::before {
 #mfg-btn,
 #montage-btn,
 #info-btn {
-    background-color: #000000; /* Черный цвет для всех кнопок */
+    background-color: #1e1e1e; /* Темный цвет для всех кнопок */
 }
 
 /* Кнопки при наведении */
 .button:hover {
     background-color: #333333; /* Цвет кнопок при наведении */
     transform: translateY(-5px) scale(1.05); /* Подъем кнопки вверх и легкое увеличение */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); /* Более выраженная тень */
+    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2); /* Более выраженная тень */
     opacity: 0.8; /* Сделаем кнопки более прозрачными при наведении */
-}
-
-/* Анимация для иконок */
-.button i {
-    margin-right: 10px;
-    transition: transform 0.3s, color 0.3s; /* Анимация для иконок */
 }
 
 /* Эффект при наведении на иконки */
@@ -137,11 +162,12 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
     align-items: center;
     justify-content: center;
     opacity: 0; /* Начальная непрозрачность */
     transition: opacity 0.3s ease-in-out; /* Плавный переход для opacity */
+    z-index: 2; /* Убедимся, что модальные окна выше кнопок */
 }
 
 .modal[style*="display: flex"] {
@@ -149,10 +175,11 @@ a {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #1e1e1e;
+    color: #ffffff;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
     width: 80%;
     max-width: 500px;
     text-align: center;
@@ -187,7 +214,7 @@ a {
 /* Текст внизу меню */
 .small-text {
     font-size: 12px;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     margin-top: 15px;
 }
 
@@ -229,4 +256,48 @@ a {
 .button:focus {
     outline: 2px solid #ffffff; /* Белая обводка при фокусе */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Легкая белая тень */
+}
+
+/* Закрепление кнопок внизу */
+.button-row {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 3; /* Убедимся, что кнопки выше всего остального */
+}
+
+.icon-button {
+    padding: 10px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease;
+}
+
+/* Кнопка "Магазин" */
+#store-btn {
+    background-color: #ffffff; /* Белый цвет для кнопки Магазин */
+    color: #aaa; /* Немного серый цвет для текста */
+    cursor: not-allowed; /* Отключаем возможность клика */
+    box-shadow: none; /* Убираем анимацию */
+}
+
+/* Кнопки при наведении */
+.icon-button:hover {
+    background-color: #333333; /* Цвет кнопок при наведении */
+    transform: translateY(-5px) scale(1.1); /* Подъем кнопки вверх и легкое увеличение */
+    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2); /* Более выраженная тень */
 }

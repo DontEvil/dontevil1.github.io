@@ -9,14 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
-
     <div class="content-container">
         <div class="image-container">
             <img src="character.png" alt="GTA Character" class="character-image" id="character-image" aria-label="Персонаж GTA">
         </div>
-
         <div class="button-column">
             <button class="button" id="mfg-btn" aria-label="MFG 1.0">
                 <i class="fas fa-cogs"></i> MFG 1.0
@@ -27,12 +24,18 @@
             <button class="button" id="info-btn" aria-label="Информация">
                 <i class="fas fa-info-circle"></i> Информация
             </button>
-            <button class="button" id="store-btn" disabled aria-label="Магазин">
-                <i class="fas fa-store"></i> Магазин
-            </button>
         </div>
     </div>
+    <div class="button-row">
+        <button class="icon-button" id="youtube-btn" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+        </button>
+        <button class="icon-button" id="store-btn" disabled aria-label="Магазин">
+            <i class="fas fa-store"></i>
+        </button>
+    </div>
 
+    <!-- Модальные окна -->
     <div id="modal-mfg" class="modal" role="dialog" aria-labelledby="modal-mfg-title" aria-hidden="true">
         <div class="modal-content">
             <div id="mfg-image"></div> <!-- Фоновая картинка для MFG -->
@@ -41,7 +44,6 @@
             <p class="small-text">Спасибо, что пользуетесь нашим редуксом <3</p> <!-- Текст для MFG -->
         </div>
     </div>
-
     <div id="modal-montage" class="modal" role="dialog" aria-labelledby="modal-montage-title" aria-hidden="true">
         <div class="modal-content">
             <div id="montage-image"></div> <!-- Фоновая картинка для Монтаж -->
@@ -50,14 +52,12 @@
             <p class="small-text">Один из самых лучших бесплатных паков для ваших работ</p> <!-- Текст для Монтаж -->
         </div>
     </div>
-
     <div id="modal-info" class="modal" role="dialog" aria-labelledby="modal-info-title" aria-hidden="true">
         <div class="modal-content">
             <h2 id="modal-info-title">Информация</h2>
             <p>Бот будет дорабатываться со временем, спасибо что пользуетесь <3 Предлагайте свои идеи в основном телеграмм канале для улучшения бота.</p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
