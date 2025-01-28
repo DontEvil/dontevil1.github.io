@@ -1,73 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Получаем элементы модальных окон
-    const modals = document.querySelectorAll('.modal');
+document.addEventListener('DOMContentLoaded', () => {
     const clickSound = document.getElementById('click-sound');
+    const modals = document.querySelectorAll('.modal');
+    
+    // Обработчики основных кнопок
+    const buttons = {
+        'mfg-btn': 'mfg-modal',
+        'montage-btn': 'montage-modal',
+        'programs-btn': 'programs-modal',
+        'info-btn': 'info-modal'
+    };
 
-    // Функции для открытия модальных окон и воспроизведения звука
-    document.getElementById('mfg-btn').addEventListener('click', function() {
-        clickSound.play();  // Воспроизводим звук
-        openModal('modal-mfg'); // Открыть модальное окно для MFG
+    Object.keys(buttons).forEach(btnId => {
+        document.getElementById(btnId).addEventListener('click', () => {
+            clickSound.play();
+            const modalId = buttons[btnId];
+            document.getElementById(modalId).style.display = 'flex';
+        });
     });
 
-    document.getElementById('montage-btn').addEventListener('click', function() {
-        clickSound.play();  // Воспроизводим звук
-        openModal('modal-montage'); // Открыть модальное окно для Монтаж
+    // YouTube кнопка
+    document.getElementById('youtube-btn').addEventListener('click', () => {
+        clickSound.play();
+        window.open('https://youtube.com/@dontev1l', '_blank');
     });
 
-    document.getElementById('info-btn').addEventListener('click', function() {
-        clickSound.play();  // Воспроизводим звук
-        openModal('modal-info'); // Открыть модальное окно для Информация
+    // Персонаж
+    document.getElementById('character-image').addEventListener('click', function() {
+        this.style.transform = 'rotate(720deg)';
+        setTimeout(() => {
+            window.location.href = 'https://t.me/dontev1l';
+        }, 1000);
     });
 
-    // Новая кнопка - YouTube канал
-    document.getElementById('youtube-btn').addEventListener('click', function() {
-        clickSound.play();  // Воспроизводим звук
-        window.open('https://www.youtube.com/@dontev1l', '_blank'); // Открыть YouTube канал в новой вкладке
-    });
-
-    // Закрытие модальных окон при клике вне их контента
+    // Закрытие модалок
     modals.forEach(modal => {
-        modal.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeModal(modal); // Закрыть модальное окно
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.style.display = 'none';
             }
         });
-    });
-
-    function openModal(modalId) {
-        // Скрываем все модальные окна
-        modals.forEach(modal => {
-            modal.style.display = 'none';
-            modal.style.opacity = '0'; // Начальная непрозрачность
-            modal.setAttribute('aria-hidden', 'true');
-        });
-
-        // Находим и отображаем выбранное модальное окно
-        const modalToShow = document.getElementById(modalId);
-        modalToShow.style.display = 'flex';
-        setTimeout(() => {
-            modalToShow.style.opacity = '1'; // Устанавливаем финальную непрозрачность
-            modalToShow.setAttribute('aria-hidden', 'false');
-        }, 10); // Задержка для плавного перехода
-    }
-
-    function closeModal(modal) {
-        modal.style.opacity = '0'; // Начинаем анимацию закрытия
-        setTimeout(() => {
-            modal.style.display = 'none'; // Скрываем окно после завершения анимации
-            modal.setAttribute('aria-hidden', 'true');
-        }, 300); // Задержка, чтобы дать время на анимацию
-    }
-
-    // Функция для вращения картинки на 720 градусов и перехода на новый путь
-    document.getElementById('character-image').addEventListener('click', function() {
-        this.style.transition = 'transform 1s ease-in-out';
-        this.style.transform = 'rotate(720deg)';
         
-        // Задержка на время завершения анимации (1 секунда)
-        setTimeout(() => {
-            // Переход на ваш Телеграм канал после анимации
-            window.location.href = 'https://t.me/dontev1l';
-        }, 1000); // Задержка, соответствующая времени анимации (1 секунда)
+        // Закрытие на ESC
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') {
+                modal.style.display = 'none';
+            }
+        });
     });
 });

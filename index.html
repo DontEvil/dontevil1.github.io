@@ -10,54 +10,150 @@
 </head>
 <body>
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+    
     <div class="content-container">
+        <!-- Персонаж -->
         <div class="image-container">
-            <img src="character.png" alt="GTA Character" class="character-image" id="character-image" aria-label="Персонаж GTA">
+            <img src="character.png" alt="Персонаж" class="character-image" id="character-image">
         </div>
+
+        <!-- Основные кнопки -->
         <div class="button-column">
-            <button class="button" id="mfg-btn" aria-label="MFG 1.0">
+            <button class="main-btn" id="mfg-btn">
                 <i class="fas fa-cogs"></i> MFG 1.0
             </button>
-            <button class="button" id="montage-btn" aria-label="Монтаж">
-                <i class="fas fa-arrow-circle-down"></i> Монтаж
+            <button class="main-btn" id="montage-btn">
+                <i class="fas fa-video"></i> Монтаж
             </button>
-            <button class="button" id="info-btn" aria-label="Информация">
-                <i class="fas fa-info-circle"></i> Информация
+            <button class="main-btn" id="programs-btn">
+                <i class="fas fa-box-open"></i> Программы
             </button>
         </div>
-        <div class="icon-button-row">
-            <button class="icon-button" id="youtube-btn" aria-label="YouTube">
-                <i class="fab fa-youtube"></i>
-            </button>
-            <button class="icon-button" id="store-btn" disabled aria-label="Магазин">
-                <i class="fas fa-store"></i>
-            </button>
+
+        <!-- Нижняя панель -->
+        <div class="bottom-panel">
+            <div class="icon-wrapper">
+                <button class="icon-btn" id="youtube-btn">
+                    <i class="fab fa-youtube"></i>
+                </button>
+                <span class="icon-label">Ютуб</span>
+            </div>
+            <div class="icon-wrapper">
+                <button class="icon-btn" id="store-btn" disabled>
+                    <i class="fas fa-store"></i>
+                </button>
+                <span class="icon-label">Магазин</span>
+            </div>
+            <div class="icon-wrapper">
+                <button class="icon-btn" id="info-btn">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <span class="icon-label">Информация</span>
+            </div>
+        </div>
+
+        <!-- Модальные окна -->
+        <div class="modal" id="mfg-modal">
+            <div class="modal-content">
+                <div class="modal-image" id="mfg-image"></div>
+                <h2 class="modal-title">MFG 1.0</h2>
+                <a href="https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view" 
+                   class="modal-btn" 
+                   target="_blank">
+                    <i class="fas fa-download"></i> Скачать MFG 1.0
+                </a>
+                <a href="https://www.youtube.com/watch?v=7kPGXcr_eyE" 
+                   class="modal-btn" 
+                   target="_blank">
+                    <i class="fas fa-video"></i> Видео-Обзор
+                </a>
+                <p class="modal-text">Спасибо, что пользуетесь нашим редуксом <3</p>
+            </div>
+        </div>
+
+        <div class="modal" id="montage-modal">
+            <div class="modal-content">
+                <div class="modal-image" id="montage-image"></div>
+                <h2 class="modal-title">МОНТАЖ</h2>
+                <a href="https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view" 
+                   class="modal-btn" 
+                   target="_blank">
+                    <i class="fas fa-download"></i> Скачать пак
+                </a>
+                <a href="https://youtu.be/80sqLOeaIK4" 
+                   class="modal-btn" 
+                   target="_blank">
+                    <i class="fas fa-film"></i> Гайд
+                </a>
+                <p class="modal-text">Один из самых лучших бесплатных паков для ваших работ</p>
+            </div>
+        </div>
+
+        <div class="modal" id="programs-modal">
+            <div class="modal-content">
+                <h2 class="modal-title"><i class="fas fa-boxes"></i> Программы</h2>
+                
+                <h3 class="modal-subtitle">ПРОГРАММЫ</h3>
+                <a href="https://drive.google.com/file/d/1JXMsX06ntHvdkSuQy-FXF89jVftA0PhL/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    💾 Premiere Pro 2024
+                </a>
+                <a href="https://drive.google.com/file/d/1xUzEOa2JvrVGJ-OxwtkApOKBqbY7hsYK/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🎥 AE 2024
+                </a>
+                <a href="https://drive.google.com/file/d/1lGuKCY3CTmUdBsSgWjTD9ZHm2TNL3kK-/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    📀 Media Encoder 2024
+                </a>
+
+                <h3 class="modal-subtitle">ПЛАГИНЫ</h3>
+                <a href="https://drive.google.com/file/d/1DTSRckx7FypIfRXp2GQxkyh2E_SPn5nV/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 Sapphire
+                </a>
+                <a href="https://drive.google.com/file/d/10MaVpDFIX-yk2ctZGo4L2GtbS4yqqkmQ/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 BCC
+                </a>
+                <a href="https://drive.google.com/file/d/1BntCDt7HSvc8p2nKeCciY2x7t39bYIGW/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 Pixel Sort
+                </a>
+                <a href="https://drive.google.com/file/d/1v9yJmjYWEI7MYlft5iPPjyn2aA3C3c-a/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 Universe 24 2.0
+                </a>
+                <a href="https://drive.google.com/file/d/1CuqFQbPi0qgfor9AS0MMUrTcWorp3IIk/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 RE:Vision FX
+                </a>
+                <a href="https://drive.google.com/file/d/1NGqH_85TRrlcesg7_P6TRAUrSa1rVdRJ/view?usp=sharing" 
+                   class="modal-btn" 
+                   target="_blank">
+                    🔧 Magic Bullet Suite 2024
+                </a>
+            </div>
+        </div>
+
+        <div class="modal" id="info-modal">
+            <div class="modal-content">
+                <h2 class="modal-title"><i class="fas fa-info-circle"></i> Информация</h2>
+                <p class="modal-text">Бот находится в активной разработке.<br>
+                Все предложения отправляйте в <a href="https://t.me/dontev1l" class="link">телеграм-канал</a>.<br>
+                Версия: 2.0.1</p>
+            </div>
         </div>
     </div>
 
-    <!-- Модальные окна -->
-    <div id="modal-mfg" class="modal" role="dialog" aria-labelledby="modal-mfg-title" aria-hidden="true">
-        <div class="modal-content">
-            <div id="mfg-image"></div> <!-- Фоновая картинка для MFG -->
-            <a href="https://drive.google.com/file/d/1uLDt0s_8TNg1xtuqR3KP8w4xSIgbLmvy/view" target="_blank" class="button">Скачать MFG 1.0</a>
-            <a href="https://www.youtube.com/watch?v=7kPGXcr_eyE&ab_channel=DONTEVIL" target="_blank" class="button">Видео-Обзор 📹</a>
-            <p class="small-text">Спасибо, что пользуетесь нашим редуксом <3</p> <!-- Текст для MFG -->
-        </div>
-    </div>
-    <div id="modal-montage" class="modal" role="dialog" aria-labelledby="modal-montage-title" aria-hidden="true">
-        <div class="modal-content">
-            <div id="montage-image"></div> <!-- Фоновая картинка для Монтаж -->
-            <a href="https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view?usp=sharing" target="_blank" class="button">Скачать пак</a>
-            <a href="https://youtu.be/80sqLOeaIK4" target="_blank" class="button">Гайд 🎥</a>
-            <p class="small-text">Один из самых лучших бесплатных паков для ваших работ</p> <!-- Текст для Монтаж -->
-        </div>
-    </div>
-    <div id="modal-info" class="modal" role="dialog" aria-labelledby="modal-info-title" aria-hidden="true">
-        <div class="modal-content">
-            <h2 id="modal-info-title">Информация</h2>
-            <p>Бот будет дорабатываться со временем, спасибо что пользуетесь <3 Предлагайте свои идеи в основном телеграмм канале для улучшения бота.</p>
-        </div>
-    </div>
     <script src="script.js"></script>
 </body>
 </html>

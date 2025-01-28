@@ -6,21 +6,15 @@
 
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    background-image: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif');
+    background: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif') fixed;
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    text-align: center;
-    overflow: hidden;
+    min-height: 100vh;
     position: relative;
 }
 
-/* Полупрозрачный слой */
 body::before {
     content: '';
     position: absolute;
@@ -28,270 +22,192 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
+    background: rgba(0,0,0,0.6);
     z-index: -1;
 }
 
-/* Стили для контейнера контента */
 .content-container {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
     width: 100%;
     max-width: 600px;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.6); /* Сделаем фон более прозрачным */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    z-index: 1; /* Убедимся, что контейнер контента выше модальных окон */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
 }
 
-/* Стили для картинки */
 .character-image {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    margin: 40px auto;
-    object-fit: cover;
+    display: block;
+    margin: 0 auto 30px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: 0.4s;
+    border: 3px solid white;
+    object-fit: cover;
 }
 
-/* Эффект при наведении на картинку */
 .character-image:hover {
-    transform: scale(1.1) rotate(5deg); /* Увеличение картинки и легкое вращение */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Добавим красивую тень */
+    transform: rotate(15deg) scale(1.1);
+    border-width: 4px;
 }
 
-/* Стили для кнопок */
 .button-column {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
-/* Основные стили для кнопок */
-.button {
-    padding: 15px 25px;
-    background-color: #1e1e1e; /* Темный цвет для кнопок */
-    color: #ffffff;
-    border: 1px solid #ffffff;
-    border-radius: 50px; /* Округлая форма кнопки */
-    font-size: 18px;
-    font-family: 'Source Sans Pro', sans-serif; /* Применяем шрифт Source Sans Pro Medium 500 */
+.main-btn {
+    background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.main-btn i {
+    font-size: 20px;
+}
+
+.main-btn:hover {
+    background: linear-gradient(45deg, #2d2d2d, #3a3a3a);
+    transform: translateY(-3px);
+}
+
+.bottom-panel {
+    display: flex;
     justify-content: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease, opacity 0.4s ease;
-    width: 100%;
-    position: relative;
-    text-align: center; /* Убедимся, что текст будет по центру */
-    overflow: hidden; /* Для анимации фона */
-    z-index: 1; /* Убедимся, что кнопки выше модальных окон */
+    gap: 25px;
 }
 
-/* Эффект волны для кнопок */
-.button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: all 0.75s;
+.icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.icon-btn {
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    z-index: 0;
-    transform: translate(-50%, -50%) scale(0);
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.button:hover::before {
-    transform: translate(-50%, -50%) scale(1);
+.icon-btn:hover {
+    background: #2d2d2d;
+    transform: scale(1.1);
 }
 
-.button i {
-    margin-right: 10px;
-    transition: transform 0.3s, color 0.3s; /* Анимация для иконок */
-    z-index: 1; /* Иконка и текст должны быть выше эффекта волны */
+.icon-label {
+    color: white;
+    font-size: 12px;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
 
-.button span {
-    z-index: 1; /* Текст должен быть выше эффекта волны */
-}
-
-/* Кнопка "Магазин" */
-#store-btn {
-    background-color: #ffffff; /* Белый цвет для кнопки Магазин */
-    color: #aaa; /* Немного серый цвет для текста */
-    cursor: not-allowed; /* Отключаем возможность клика */
-    box-shadow: none; /* Убираем анимацию */
-}
-
-/* Кнопки "MFG 1.0", "Монтаж", "Информация" */
-#mfg-btn,
-#montage-btn,
-#info-btn {
-    background-color: #1e1e1e; /* Темный цвет для всех кнопок */
-}
-
-/* Кнопки при наведении */
-.button:hover {
-    background-color: #333333; /* Цвет кнопок при наведении */
-    transform: translateY(-5px) scale(1.05); /* Подъем кнопки вверх и легкое увеличение */
-    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2); /* Более выраженная тень */
-    opacity: 0.8; /* Сделаем кнопки более прозрачными при наведении */
-}
-
-/* Эффект при наведении на иконки */
-.button:hover i {
-    transform: rotate(360deg) scale(1.3); /* Вращение и увеличение иконки */
-    color: #ff5733; /* Цвет иконки при наведении */
-}
-
-/* Убираем подчеркивание у ссылок */
-a {
-    text-decoration: none;
-}
-
-/* Модальные окна */
 .modal {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    align-items: center;
+    background: rgba(0,0,0,0.8);
+    display: none;
     justify-content: center;
-    opacity: 0; /* Начальная непрозрачность */
-    transition: opacity 0.3s ease-in-out; /* Плавный переход для opacity */
-    z-index: 2; /* Убедимся, что модальные окна выше кнопок */
-}
-
-.modal[style*="display: flex"] {
-    opacity: 1; /* Полная видимость при открытии */
+    align-items: center;
+    z-index: 1000;
 }
 
 .modal-content {
-    background-color: #1e1e1e;
-    color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-    animation: slideIn 0.3s ease-out;
+    background: #1a1a1a;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 15px;
+    padding: 20px;
+    animation: modalOpen 0.4s;
 }
 
-/* Отступы между кнопками */
-.modal-content .button {
-    margin-bottom: 15px; /* Отступ между кнопками */
+.modal-subtitle {
+    color: #fff;
+    font-size: 16px;
+    margin: 15px 0 10px;
+    text-transform: uppercase;
 }
 
-/* Фоновое изображение с блюром */
-#mfg-image, #montage-image {
+#mfg-image {
+    background-image: url('mfg-bg.jpg');
     background-size: cover;
-    background-position: center;
-    width: 100%;
     height: 200px;
     border-radius: 10px;
-    filter: blur(10%) opacity(0.6);
-    margin-bottom: 20px; /* Отступ от фона до кнопок */
+    margin: -20px -20px 20px -20px;
 }
 
-/* Пример задания фона через CSS */
-#modal-mfg #mfg-image {
-    background-image: url('mfg-image.jpg'); /* Путь к изображению для MFG */
+#montage-image {
+    background-image: url('montage-bg.jpg');
+    background-size: cover;
+    height: 200px;
+    border-radius: 10px;
+    margin: -20px -20px 20px -20px;
 }
 
-#modal-montage #montage-image {
-    background-image: url('montage-image.jpg'); /* Путь к изображению для Монтаж */
+.modal-title {
+    color: #ff4655;
+    font-size: 24px;
+    margin: 15px 0;
+    text-transform: uppercase;
+    text-align: center;
 }
 
-/* Текст внизу меню */
-.small-text {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 15px;
-}
-
-/* Анимация для появления модального окна */
-@keyframes slideIn {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Мобильная версия */
-@media (max-width: 600px) {
-    .character-image {
-        width: 120px;
-        height: 120px;
-    }
-
-    .button-column {
-        width: 100%;
-        margin-top: 20px;
-    }
-
-    .button {
-        padding: 12px 15px;
-        font-size: 16px;
-    }
-
-    .modal-content {
-        width: 90%;
-    }
-}
-
-/* Стиль для фокуса на кнопках */
-.button:focus {
-    outline: 2px solid #ffffff; /* Белая обводка при фокусе */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Легкая белая тень */
-}
-
-/* Горизонтальное расположение кнопок */
-.icon-button-row {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.icon-button {
-    padding: 10px;
-    background-color: #1e1e1e;
-    color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+.modal-btn {
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.4s ease, background-color 0.4s ease;
+    gap: 10px;
+    background: #2d2d2d;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-/* Кнопка "Магазин" */
-#store-btn {
-    background-color: #ffffff; /* Белый цвет для кнопки Магазин */
-    color: #aaa; /* Немного серый цвет для текста */
-    cursor: not-allowed; /* Отключаем возможность клика */
-    box-shadow: none; /* Убираем анимацию */
+.modal-btn:hover {
+    background: #3a3a3a;
+    transform: translateX(10px);
 }
 
-/* Кнопки при наведении */
-.icon-button:hover {
-    background-color: #333333; /* Цвет кнопок при наведении */
-    transform: translateY(-5px) scale(1.1); /* Подъем кнопки вверх и легкое увеличение */
-    box-shadow: 0 12px 40px rgba(255, 255, 255, 0.2); /* Более выраженная тень */
+.modal-text {
+    color: #aaa;
+    text-align: center;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.link {
+    color: #ff4655;
+    text-decoration: none;
+}
+
+@keyframes modalOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
