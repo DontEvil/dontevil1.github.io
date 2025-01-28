@@ -1,9 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
     
-    // Добавлены эти 2 строки для полноэкранного режима
-    tg.expand(); // Основная команда для раскрытия на весь экран
-    tg.enableClosingConfirmation(); // Опционально: подтверждение закрытия
+    // Добавление обработки ошибок для tg.expand и tg.enableClosingConfirmation
+    try {
+        tg.expand(); // Основная команда для раскрытия на весь экран
+        tg.enableClosingConfirmation(); // Опционально: подтверждение закрытия
+    } catch (error) {
+        console.error('Ошибка при вызове tg.expand или tg.enableClosingConfirmation:', error);
+    }
     
     tg.BackButton.hide();
     const clickSound = document.getElementById('click-sound');
