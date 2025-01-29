@@ -1,23 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
-    
-    // Добавление обработки ошибок для tg.expand и tg.enableClosingConfirmation
-    try {
-        tg.expand(); // Основная команда для раскрытия на весь экран
-        tg.enableClosingConfirmation(); // Опционально: подтверждение закрытия
-    } catch (error) {
-        console.error('Ошибка при вызове tg.expand или tg.enableClosingConfirmation:', error);
+
+    // Проверяем платформу
+    if (tg.platform === 'web') {
+        try {
+            tg.expand(); // Расширяем на весь экран для ПК
+            console.log("Web App expanded on PC.");
+        } catch (error) {
+            console.error('Ошибка при вызове tg.expand:', error);
+        }
     }
-    
+
+    tg.enableClosingConfirmation(); // Подтверждение закрытия
     tg.BackButton.hide();
+
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
-    
+
     const playSound = () => {
         try {
             clickSound.currentTime = 0;
             clickSound.play();
-        } catch(e) {
+        } catch (e) {
             console.log('Sound playback error:', e);
         }
     };
@@ -40,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tg.onEvent('backButtonClicked', () => {
         modals.forEach(modal => {
-            if(modal.style.display === 'flex') {
+            if (modal.style.display === 'flex') {
                 modal.style.display = 'none';
                 tg.BackButton.hide();
             }
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tg.openLink('https://youtube.com/@dontev1l');
     });
 
-    document.getElementById('character-image').addEventListener('click', function() {
+    document.getElementById('character-image').addEventListener('click', function () {
         this.style.transform = 'rotate(720deg)';
         setTimeout(() => {
             tg.openLink('https://t.me/dontev1l');
@@ -61,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modals.forEach(modal => {
         modal.addEventListener('click', (e) => {
-            if(e.target === modal) {
+            if (e.target === modal) {
                 modal.style.display = 'none';
                 tg.BackButton.hide();
             }
@@ -69,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('keydown', (e) => {
-        if(e.key === 'Escape') {
+        if (e.key === 'Escape') {
             modals.forEach(modal => {
-                if(modal.style.display === 'flex') {
+                if (modal.style.display === 'flex') {
                     modal.style.display = 'none';
                     tg.BackButton.hide();
                 }
