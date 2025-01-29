@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: 'Source Sans Pro', sans-serif;
     background: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif') fixed;
@@ -13,8 +12,10 @@ body {
     align-items: center;
     min-height: 100vh;
     position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
-
 body::before {
     content: '';
     position: absolute;
@@ -25,7 +26,6 @@ body::before {
     background: rgba(0,0,0,0.6);
     z-index: -1;
 }
-
 .content-container {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
@@ -35,7 +35,6 @@ body::before {
     border-radius: 20px;
     box-shadow: 0 0 30px rgba(0,0,0,0.3);
 }
-
 .character-image {
     width: 200px;
     height: 200px;
@@ -47,19 +46,16 @@ body::before {
     border: 3px solid white;
     object-fit: cover;
 }
-
 .character-image:hover {
     transform: rotate(15deg) scale(1.1);
     border-width: 4px;
 }
-
 .button-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
     margin-bottom: 30px;
 }
-
 .main-btn {
     background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
     color: white;
@@ -73,29 +69,24 @@ body::before {
     gap: 10px;
     transition: 0.3s;
 }
-
 .main-btn i {
     font-size: 20px;
 }
-
 .main-btn:hover {
     background: linear-gradient(45deg, #2d2d2d, #3a3a3a);
     transform: translateY(-3px);
 }
-
 .bottom-panel {
     display: flex;
     justify-content: center;
     gap: 25px;
 }
-
 .icon-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
 }
-
 .icon-btn {
     width: 45px;
     height: 45px;
@@ -106,18 +97,15 @@ body::before {
     cursor: pointer;
     transition: 0.3s;
 }
-
 .icon-btn:hover {
     background: #2d2d2d;
     transform: scale(1.1);
 }
-
 .icon-label {
     color: white;
     font-size: 12px;
     text-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
-
 .modal {
     position: fixed;
     top: 0;
@@ -130,7 +118,6 @@ body::before {
     align-items: center;
     z-index: 1000;
 }
-
 .modal-content {
     background: #1a1a1a;
     width: 90%;
@@ -139,14 +126,12 @@ body::before {
     padding: 20px;
     animation: modalOpen 0.4s;
 }
-
 .modal-subtitle {
     color: #fff;
     font-size: 16px;
     margin: 15px 0 10px;
     text-transform: uppercase;
 }
-
 #mfg-image {
     background-image: url('mfg-bg.jpg');
     background-size: cover;
@@ -154,7 +139,6 @@ body::before {
     border-radius: 10px;
     margin: -20px -20px 20px -20px;
 }
-
 #montage-image {
     background-image: url('montage-bg.jpg');
     background-size: cover;
@@ -162,7 +146,6 @@ body::before {
     border-radius: 10px;
     margin: -20px -20px 20px -20px;
 }
-
 .modal-title {
     color: #ff4655;
     font-size: 24px;
@@ -170,7 +153,6 @@ body::before {
     text-transform: uppercase;
     text-align: center;
 }
-
 .modal-btn {
     display: flex;
     align-items: center;
@@ -183,24 +165,20 @@ body::before {
     text-decoration: none;
     transition: 0.3s;
 }
-
 .modal-btn:hover {
     background: #3a3a3a;
     transform: translateX(10px);
 }
-
 .modal-text {
     color: #aaa;
     text-align: center;
     margin: 15px 0;
     line-height: 1.5;
 }
-
 .link {
     color: #ff4655;
     text-decoration: none;
 }
-
 @keyframes modalOpen {
     from {
         opacity: 0;
@@ -211,7 +189,6 @@ body::before {
         transform: scale(1);
     }
 }
-
 @media (max-width: 480px) {
     .content-container {
         padding: 15px;

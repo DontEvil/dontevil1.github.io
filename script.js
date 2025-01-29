@@ -1,14 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
 
-    // Проверяем платформу
+    // Логирование платформы
+    console.log("Platform:", tg.platform);
+
+    // Устанавливаем минимальный размер окна
+    tg.MainButton.setParams({
+        text: "Закрыть",
+        is_visible: false
+    });
+
+    // Проверяем платформу и вызываем expand()
     if (tg.platform === 'web') {
-        try {
-            tg.expand(); // Расширяем на весь экран для ПК
-            console.log("Web App expanded on PC.");
-        } catch (error) {
-            console.error('Ошибка при вызове tg.expand:', error);
-        }
+        setTimeout(() => {
+            try {
+                tg.expand(); // Расширяем на весь экран для ПК
+                console.log("Web App expanded on PC.");
+            } catch (error) {
+                console.error('Ошибка при вызове tg.expand:', error);
+            }
+        }, 100); // Задержка 100 мс
     }
 
     tg.enableClosingConfirmation(); // Подтверждение закрытия
