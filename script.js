@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'programs-btn': 'programs-modal',
         'info-btn': 'info-modal'
     };
+
     Object.keys(buttons).forEach(btnId => {
         const button = document.getElementById(btnId);
         if (button) {
@@ -101,6 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 tg.BackButton.hide();
             }
         });
+
+        // Если нет открытых модальных окон, показываем предупреждение
+        if (!modals.some(modal => modal.style.display === 'flex')) {
+            WebApp.showAlert("Нет пути назад!");
+            tg.BackButton.hide();
+        }
     });
 
     // Кнопка YouTube
