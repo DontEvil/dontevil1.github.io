@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
+
     const playSound = () => {
         try {
             clickSound.currentTime = 0;
@@ -66,6 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Ошибка при переходе на страницу магазина:', error);
         }
     });
+
+    // Настройка кнопки "Назад" для переходов между страницами
+    function setupBackButton() {
+        if (document.referrer) {
+            tg.BackButton.show();
+            tg.BackButton.onClick(() => {
+                window.history.back();
+            });
+        } else {
+            tg.BackButton.hide();
+        }
+    }
+
+    // Вызываем функцию при загрузке страницы
+    setupBackButton();
 
     // Закрытие модальных окон
     modals.forEach(modal => {
@@ -111,5 +127,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    });
+
+    // Добавляем обработчики для кнопок в нижней панели
+    document.querySelectorAll('.icon-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const targetPage = button.getAttribute('data-target');
+            if (targetPage) {
+                playSound();
+                window.location.href = targetPage;
+            }
+        });
+    });
+
+    // Добавляем звуковые эффекты для всех интерактивных кнопок
+    document.querySelectorAll('.main-btn, .icon-btn, .store-btn, .order-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            playSound();
+        });
     });
 });
