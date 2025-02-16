@@ -1,6 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
 
+    // Проверяем, доступен ли Telegram WebApp
+    if (!tg) {
+        console.error("Telegram WebApp не поддерживается в этом контексте.");
+        return;
+    }
+
     // Логирование платформы
     console.log("Platform:", tg.platform);
 
@@ -8,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tg.MainButton.setParams({
         text: "Закрыть",
         is_visible: true, // Показываем кнопку "Закрыть" по умолчанию
-        is_active: false
+        is_active: true // Кнопка становится активной
     });
 
     // Проверяем платформу и вызываем expand()
@@ -48,10 +54,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupButtons() {
         if (getQueryParam('back') === 'true' || window.history.length > 1) {
             tg.BackButton.show(); // Показываем кнопку "Назад"
+            tg.BackButton.onClick(() => {
+                console.log("Кнопка 'Назад' была нажата!");
+                if (window.history.length > 1) {
+                    window.history.back(); // Возвращаемся на предыдущую страницу
+                } else {
+                    tg.close(); // Закрываем Web App, если история пуста
+                }
+            });
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
         } else {
             tg.BackButton.hide(); // Скрываем кнопку "Назад"
-            tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
+            tg.MainButton.setParams({
+                text: "Закрыть",
+                is_visible: true,
+                is_active: true // Кнопка становится активной
+            });
+            tg.MainButton.onClick(() => {
+                console.log("Кнопка 'Закрыть' была нажата!");
+                tg.close(); // Закрываем Web App
+            });
         }
     }
 
@@ -111,25 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === modal) {
                 modal.style.display = 'none';
                 tg.BackButton.hide(); // Скрываем кнопку "Назад"
-                tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
+                tg.MainButton.setParams({
+                    text: "Закрыть",
+                    is_visible: true,
+                    is_active: true // Кнопка становится активной
+                }); // Показываем кнопку "Закрыть"
             }
         });
-    });
-
-    // Обработка кнопки "Назад" в Telegram
-    tg.onEvent('backButtonClicked', () => {
-        modals.forEach(modal => {
-            if (modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                tg.BackButton.hide(); // Скрываем кнопку "Назад"
-                tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
-            }
-        });
-
-        // Если нет открытых модальных окон и это не главная страница, возвращаемся назад
-        if (!modals.some(modal => modal.style.display === 'flex') && window.history.length > 1) {
-            window.history.back();
-        }
     });
 
     // Кнопка YouTube
@@ -153,7 +163,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modal.style.display === 'flex') {
                     modal.style.display = 'none';
                     tg.BackButton.hide(); // Скрываем кнопку "Назад"
-                    tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
+                    tg.MainButton.setParams({
+                        text: "Закрыть",
+                        is_visible: true,
+                        is_active: true // Кнопка становится активной
+                    }); // Показываем кнопку "Закрыть"
                 }
             });
         }
