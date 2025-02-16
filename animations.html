@@ -66,6 +66,44 @@
     </div>
     <script src="script.js"></script>
     <script>
+        // Инициализация Telegram Web App
+        const tg = window.Telegram.WebApp;
+
+        // Логирование платформы
+        console.log("Platform:", tg.platform);
+
+        // Настройка кнопки "Назад"
+        function setupBackButton() {
+            if (document.referrer) {
+                tg.BackButton.show();
+                tg.BackButton.onClick(() => {
+                    window.history.back();
+                });
+            } else {
+                tg.BackButton.hide();
+            }
+        }
+
+        // Вызываем функцию при загрузке страницы
+        document.addEventListener("DOMContentLoaded", () => {
+            setupBackButton();
+        });
+
+        // Обработка закрытия модальных окон через кнопку "Назад"
+        tg.onEvent('backButtonClicked', () => {
+            let modalClosed = false;
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                    modalClosed = true;
+                }
+            });
+            if (!modalClosed) {
+                window.history.back();
+            }
+        });
+
         // Открытие модального окна при клике на видео
         const storeItems = document.querySelectorAll('.store-item');
         storeItems.forEach(item => {
@@ -75,7 +113,6 @@
                 const modal = document.getElementById(modalId);
                 if (modal) {
                     modal.style.display = 'flex';
-                    showBackButtonIfModalOpen();
                 }
             });
         });
@@ -86,66 +123,6 @@
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
-                    hideBackButtonIfNoModalsOpen();
-                }
-            });
-        });
-
-        // Настройка кнопки "Назад" для переходов между страницами
-        const tg = window.Telegram.WebApp;
-
-        function setupBackButton() {
-            if (document.referrer || isModalOpen()) {
-                tg.BackButton.show();
-                tg.BackButton.onClick(() => {
-                    if (isModalOpen()) {
-                        closeAllModals();
-                    } else {
-                        window.history.back();
-                    }
-                });
-            } else {
-                tg.BackButton.hide();
-            }
-        }
-
-        // Проверка, открыто ли модальное окно
-        function isModalOpen() {
-            return Array.from(modals).some(modal => modal.style.display === 'flex');
-        }
-
-        // Закрытие всех модальных окон
-        function closeAllModals() {
-            modals.forEach(modal => {
-                if (modal.style.display === 'flex') {
-                    modal.style.display = 'none';
-                }
-            });
-            hideBackButtonIfNoModalsOpen();
-        }
-
-        // Показ кнопки "Назад", если открыто модальное окно
-        function showBackButtonIfModalOpen() {
-            if (isModalOpen()) {
-                tg.BackButton.show();
-            }
-        }
-
-        // Скрытие кнопки "Назад", если нет открытых модальных окон
-        function hideBackButtonIfNoModalsOpen() {
-            if (!isModalOpen() && !document.referrer) {
-                tg.BackButton.hide();
-            }
-        }
-
-        // Вызываем функцию при загрузке страницы
-        document.addEventListener("DOMContentLoaded", () => {
-            setupBackButton();
-
-            // Закрытие модальных окон по клавише Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeAllModals();
                 }
             });
         });

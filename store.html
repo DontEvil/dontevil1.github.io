@@ -43,9 +43,13 @@
     </div>
     <script src="script.js"></script>
     <script>
-        // Настройка кнопки "Назад" для переходов между страницами
+        // Инициализация Telegram Web App
         const tg = window.Telegram.WebApp;
 
+        // Логирование платформы
+        console.log("Platform:", tg.platform);
+
+        // Настройка кнопки "Назад"
         function setupBackButton() {
             if (document.referrer) {
                 tg.BackButton.show();
@@ -60,17 +64,21 @@
         // Вызываем функцию при загрузке страницы
         document.addEventListener("DOMContentLoaded", () => {
             setupBackButton();
+        });
 
-            // Добавляем звуковые эффекты для всех интерактивных кнопок
-            const clickSound = document.getElementById('click-sound');
-            document.querySelectorAll('.dynamic-gradient-btn, .disabled-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    if (clickSound) {
-                        clickSound.currentTime = 0; // Сбрасываем звук, чтобы он мог воспроизводиться повторно
-                        clickSound.play();
-                    }
-                });
+        // Обработка закрытия модальных окон через кнопку "Назад"
+        tg.onEvent('backButtonClicked', () => {
+            let modalClosed = false;
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                    modalClosed = true;
+                }
             });
+            if (!modalClosed) {
+                window.history.back();
+            }
         });
     </script>
 </body>
