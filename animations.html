@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Звуковой эффект -->
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
 
     <!-- Фоновое видео -->
@@ -16,10 +15,8 @@
         <source src="background.mp4" type="video/mp4">
     </video>
 
-    <!-- Контент -->
     <div class="content-container">
         <h2 class="modal-title">Анимации</h2>
-
         <!-- Горизонтальный контейнер с карточками -->
         <div class="button-row">
             <!-- Промокод для Majestic RP -->
@@ -31,7 +28,6 @@
                 <p class="store-description">Анимация для вашего промокода - 500 рублей.</p>
                 <a href="https://t.me/d0ntevil" class="order-btn">Заказать</a>
             </div>
-
             <!-- Промокод для GTA5RP -->
             <div class="store-item" data-modal-id="gta5rp-modal">
                 <video class="store-video" autoplay loop muted poster="gta5rp-preview.jpg">
@@ -43,7 +39,6 @@
             </div>
         </div>
     </div>
-
     <!-- Модальные окна -->
     <div class="modal" id="majestic-modal">
         <div class="modal-content">
@@ -52,13 +47,12 @@
             </video>
             <h2 class="modal-title">Промокод для Majestic RP</h2>
             <p class="modal-text">
-                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас!
-                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично.
+                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас! 
+                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично, что поможет выделиться среди конкурентов.
             </p>
             <a href="https://t.me/d0ntevil" class="modal-btn">Заказать</a>
         </div>
     </div>
-
     <div class="modal" id="gta5rp-modal">
         <div class="modal-content">
             <video class="modal-video" autoplay loop muted>
@@ -66,14 +60,33 @@
             </video>
             <h2 class="modal-title">Промокод для GTA5RP</h2>
             <p class="modal-text">
-                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас!
-                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично.
+                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас! 
+                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично, что поможет выделиться среди конкурентов.
             </p>
             <a href="https://t.me/d0ntevil" class="modal-btn">Заказать</a>
         </div>
     </div>
-
-    <!-- Подключение скрипта -->
     <script src="script.js"></script>
+    <script>
+        // Открытие модального окна при клике на видео
+        const storeItems = document.querySelectorAll('.store-item');
+        storeItems.forEach(item => {
+            const video = item.querySelector('.store-video');
+            video.addEventListener('click', () => {
+                const modalId = item.getAttribute('data-modal-id');
+                document.getElementById(modalId).style.display = 'flex';
+            });
+        });
+
+        // Закрытие модального окна по клику вне его области
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
