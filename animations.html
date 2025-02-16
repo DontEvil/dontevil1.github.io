@@ -9,10 +9,12 @@
 </head>
 <body>
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+
     <!-- Фоновое видео -->
     <video autoplay loop muted playsinline class="background-video">
         <source src="background.mp4" type="video/mp4">
     </video>
+
     <div class="content-container">
         <h2 class="modal-title">Анимации</h2>
         <!-- Горизонтальный контейнер с карточками -->
@@ -66,54 +68,13 @@
     </div>
     <script src="script.js"></script>
     <script>
-        // Инициализация Telegram Web App
-        const tg = window.Telegram.WebApp;
-
-        // Логирование платформы
-        console.log("Platform:", tg.platform);
-
-        // Настройка кнопки "Назад"
-        function setupBackButton() {
-            if (document.referrer) {
-                tg.BackButton.show();
-                tg.BackButton.onClick(() => {
-                    window.history.back();
-                });
-            } else {
-                tg.BackButton.hide();
-            }
-        }
-
-        // Вызываем функцию при загрузке страницы
-        document.addEventListener("DOMContentLoaded", () => {
-            setupBackButton();
-        });
-
-        // Обработка закрытия модальных окон через кнопку "Назад"
-        tg.onEvent('backButtonClicked', () => {
-            let modalClosed = false;
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (modal.style.display === 'flex') {
-                    modal.style.display = 'none';
-                    modalClosed = true;
-                }
-            });
-            if (!modalClosed) {
-                window.history.back();
-            }
-        });
-
         // Открытие модального окна при клике на видео
         const storeItems = document.querySelectorAll('.store-item');
         storeItems.forEach(item => {
             const video = item.querySelector('.store-video');
             video.addEventListener('click', () => {
                 const modalId = item.getAttribute('data-modal-id');
-                const modal = document.getElementById(modalId);
-                if (modal) {
-                    modal.style.display = 'flex';
-                }
+                document.getElementById(modalId).style.display = 'flex';
             });
         });
 
