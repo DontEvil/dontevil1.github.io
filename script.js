@@ -10,24 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
         is_visible: false
     });
 
-    // Проверяем платформу и вызываем expand()
+    // Расширяем на весь экран для ПК
     if (tg.platform === 'web') {
         setTimeout(() => {
             try {
-                tg.expand(); // Расширяем на весь экран для ПК
+                tg.expand();
                 console.log("Web App expanded on PC.");
             } catch (error) {
                 console.error('Ошибка при вызове tg.expand:', error);
             }
-        }, 100); // Задержка 100 мс
+        }, 100);
     }
 
-    tg.enableClosingConfirmation(); // Подтверждение закрытия
+    // Подтверждение закрытия
+    tg.enableClosingConfirmation();
+
+    // Скрываем кнопку "назад" при загрузке
     tg.BackButton.hide();
 
+    // Звуковой эффект
     const clickSound = document.getElementById('click-sound');
-    const modals = document.querySelectorAll('.modal');
-
     const playSound = () => {
         try {
             clickSound.currentTime = 0;
@@ -50,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', () => {
                 playSound();
                 const modalId = buttons[btnId];
-                document.getElementById(modalId).style.display = 'flex';
-                tg.BackButton.show();
+                openModal(modalId);
             });
         } else {
             console.warn(`Кнопка с ID "${btnId}" не найдена.`);
@@ -61,8 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Обработка клика на кнопку "Магазин"
     document.getElementById('store-btn')?.addEventListener('click', () => {
         try {
-            playSound(); // Проигрываем звук при клике
-            window.location.href = 'store.html'; // Переход на страницу магазина
+            playSound();
+            window.location.href = 'store.html';
         } catch (error) {
             console.error('Ошибка при переходе на страницу магазина:', error);
         }
@@ -79,26 +80,41 @@ document.addEventListener('DOMContentLoaded', () => {
             tg.BackButton.hide();
         }
     }
-
-    // Вызываем функцию при загрузке страницы
     setupBackButton();
 
+    // Функции для работы с модальными окнами
+    const openModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            tg.BackButton.show(); // Показываем кнопку "назад"
+        } else {
+            console.error(`Модальное окно с ID "${modalId}" не найдено.`);
+        }
+    };
+
+    const closeModal = (modalId) => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+            tg.BackButton.hide(); // Скрываем кнопку "назад"
+        }
+    };
+
     // Закрытие модальных окон
-    modals.forEach(modal => {
+    document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.style.display = 'none';
-                tg.BackButton.hide();
+                closeModal(modal.id);
             }
         });
     });
 
     // Обработка кнопки "Назад" в Telegram
     tg.onEvent('backButtonClicked', () => {
-        modals.forEach(modal => {
+        document.querySelectorAll('.modal').forEach(modal => {
             if (modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                tg.BackButton.hide();
+                closeModal(modal.id);
             }
         });
     });
@@ -120,16 +136,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Закрытие модальных окон по клавише Esc
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            modals.forEach(modal => {
+            document.querySelectorAll('.modal').forEach(modal => {
                 if (modal.style.display === 'flex') {
-                    modal.style.display = 'none';
-                    tg.BackButton.hide();
+                    closeModal(modal.id);
                 }
             });
         }
     });
 
-    // Добавляем обработчики для кнопок в нижней панели
+    // Обработка кнопок в нижней панели
     document.querySelectorAll('.icon-btn').forEach(button => {
         button.addEventListener('click', () => {
             const targetPage = button.getAttribute('data-target');
@@ -145,5 +160,23 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             playSound();
         });
+    });
+
+    // Обработка кликов на видео для открытия модальных окон (для animations.html)
+    document.querySelectorAll('.store-item').forEach(item => {
+        const video = item.querySelector('.store-video');
+        if (video) {
+            video.addEventListener('click', (e) => {
+                e.stopPropagation(); // Предотвращаем конфликты с другими обработчиками
+                playSound();
+                const modalId = item.getAttribute('data-modal-id');
+                console.log(`Открытие модального окна с ID: ${modalId}`);
+                if (modalId) {
+                    openModal(modalId);
+                } else {
+                    console.error('Атрибут data-modal-id не задан.');
+                }
+            });
+        }
     });
 });
