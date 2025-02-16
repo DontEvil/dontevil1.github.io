@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Устанавливаем минимальный размер окна
     tg.MainButton.setParams({
         text: "Закрыть",
-        is_visible: false
+        is_visible: true, // Показываем кнопку "Закрыть" по умолчанию
+        is_active: false
     });
 
     // Проверяем платформу и вызываем expand()
@@ -52,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 playSound();
                 const modalId = buttons[btnId];
                 document.getElementById(modalId).style.display = 'flex';
-                tg.BackButton.show();
+                tg.BackButton.show(); // Показываем кнопку "Назад"
+                tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
             });
         } else {
             console.warn(`Кнопка с ID "${btnId}" не найдена.`);
@@ -63,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('store-btn')?.addEventListener('click', () => {
         try {
             playSound(); // Проигрываем звук при клике
+            tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
+            tg.BackButton.show(); // Показываем кнопку "Назад"
             window.location.href = 'store.html'; // Переход на страницу магазина
         } catch (error) {
             console.error('Ошибка при переходе на страницу магазина:', error);
@@ -72,12 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Настройка кнопки "Назад" для переходов между страницами
     function setupBackButton() {
         if (document.referrer) {
-            tg.BackButton.show();
-            tg.BackButton.onClick(() => {
-                window.history.back();
-            });
+            tg.BackButton.show(); // Показываем кнопку "Назад"
+            tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
         } else {
-            tg.BackButton.hide();
+            tg.BackButton.hide(); // Скрываем кнопку "Назад"
+            tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
         }
     }
 
@@ -89,7 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
-                tg.BackButton.hide();
+                tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
             }
         });
     });
@@ -99,14 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
         modals.forEach(modal => {
             if (modal.style.display === 'flex') {
                 modal.style.display = 'none';
-                tg.BackButton.hide();
+                tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
             }
         });
 
-        // Если нет открытых модальных окон, показываем предупреждение
-        if (!modals.some(modal => modal.style.display === 'flex')) {
-            WebApp.showAlert("Нет пути назад!");
-            tg.BackButton.hide();
+        // Если нет открытых модальных окон и это не главная страница, возвращаемся назад
+        if (!modals.some(modal => modal.style.display === 'flex') && document.referrer) {
+            window.history.back();
         }
     });
 
@@ -130,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modals.forEach(modal => {
                 if (modal.style.display === 'flex') {
                     modal.style.display = 'none';
-                    tg.BackButton.hide();
+                    tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                    tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
                 }
             });
         }
@@ -142,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPage = button.getAttribute('data-target');
             if (targetPage) {
                 playSound();
+                tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
+                tg.BackButton.show(); // Показываем кнопку "Назад"
                 window.location.href = targetPage;
             }
         });
