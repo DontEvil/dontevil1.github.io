@@ -38,6 +38,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Функция для получения параметров из URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Настройка состояния кнопок "Назад" и "Закрыть"
+    function setupButtons() {
+        if (getQueryParam('back') === 'true' || window.history.length > 1) {
+            tg.BackButton.show(); // Показываем кнопку "Назад"
+            tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
+        } else {
+            tg.BackButton.hide(); // Скрываем кнопку "Назад"
+            tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
+        }
+    }
+
+    // Вызываем функцию при загрузке страницы
+    setupButtons();
+
     // Обработка кликов на основные кнопки
     const buttons = {
         'mfg-btn': 'mfg-modal',
@@ -67,25 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
             playSound(); // Проигрываем звук при клике
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
             tg.BackButton.show(); // Показываем кнопку "Назад"
-            window.location.href = 'store.html'; // Переход на страницу магазина
+            window.location.href = 'store.html?back=true'; // Переход на страницу магазина
         } catch (error) {
             console.error('Ошибка при переходе на страницу магазина:', error);
         }
     });
 
-    // Настройка кнопки "Назад" для переходов между страницами
-    function setupBackButton() {
-        if (document.referrer) {
+    // Обработка кликов на видео-элементы для открытия модальных окон
+    const storeItems = document.querySelectorAll('.store-item');
+    storeItems.forEach(item => {
+        const video = item.querySelector('.store-video');
+        video.addEventListener('click', () => {
+            const modalId = item.getAttribute('data-modal-id');
+            document.getElementById(modalId).style.display = 'flex';
             tg.BackButton.show(); // Показываем кнопку "Назад"
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
-        } else {
-            tg.BackButton.hide(); // Скрываем кнопку "Назад"
-            tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
-        }
-    }
-
-    // Вызываем функцию при загрузке страницы
-    setupBackButton();
+        });
+    });
 
     // Закрытие модальных окон
     modals.forEach(modal => {
@@ -109,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Если нет открытых модальных окон и это не главная страница, возвращаемся назад
-        if (!modals.some(modal => modal.style.display === 'flex') && document.referrer) {
+        if (!modals.some(modal => modal.style.display === 'flex') && window.history.length > 1) {
             window.history.back();
         }
     });
@@ -149,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 playSound();
                 tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
                 tg.BackButton.show(); // Показываем кнопку "Назад"
-                window.location.href = targetPage;
+                window.location.href = targetPage + '?back=true';
             }
         });
     });
