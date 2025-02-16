@@ -7,11 +7,15 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
-    
+
+    <!-- Фоновое видео -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
     <div class="content-container">
         <!-- Персонаж -->
         <div class="image-container">
@@ -19,11 +23,13 @@
         </div>
         <!-- Основные кнопки -->
         <div class="button-column">
-            <button class="main-btn" id="mfg-btn">
-                <i class="fas fa-cogs"></i> MFG 1.0
+            <!-- Кнопка "Монтаж" -->
+            <button class="main-btn hot-btn" id="montage-btn">
+                <i class="fas fa-video"></i> Монтаж <span class="fire-emoji">🔥</span>
             </button>
-            <button class="main-btn" id="montage-btn">
-                <i class="fas fa-video"></i> Монтаж
+            <!-- Кнопка "MFG 2.0" -->
+            <button class="main-btn" id="mfg-btn">
+                <i class="fas fa-cogs"></i> MFG 2.0 (в разработке)
             </button>
             <button class="main-btn" id="programs-btn">
                 <i class="fas fa-box-open"></i> Программы
@@ -38,7 +44,7 @@
                 <span class="icon-label">Ютуб</span>
             </div>
             <div class="icon-wrapper">
-                <button class="icon-btn" id="store-btn" disabled>
+                <button class="icon-btn" id="store-btn">
                     <i class="fas fa-store"></i>
                 </button>
                 <span class="icon-label">Магазин</span>
@@ -53,24 +59,19 @@
         <!-- Модальные окна -->
         <div class="modal" id="mfg-modal">
             <div class="modal-content">
-                <div class="modal-image" id="mfg-image"></div>
-                <h2 class="modal-title">MFG 1.0</h2>
-                <a href="https://" 
-                   class="modal-btn" 
-                   target="_blank">
-                    <i class="fas fa-download"></i> Скачать MFG 1.0
-                </a>
+                <div class="modal-image" id="mfg-image" style="background-image: url('mfg-bg.jpg'); background-position: center; background-size: cover;"></div>
+                <h2 class="modal-title">MFG 2.0</h2>
+                <p class="modal-text">MFG 2.0 в разработке.<br>Примерная дата релиза: Март — Апрель.</p>
                 <a href="https://www.youtube.com/watch?v=7kPGXcr_eyE" 
                    class="modal-btn" 
                    target="_blank">
                     <i class="fas fa-video"></i> Видео-Обзор
                 </a>
-                <p class="modal-text">Спасибо, что пользуетесь нашим редуксом <3</p>
             </div>
         </div>
         <div class="modal" id="montage-modal">
             <div class="modal-content">
-                <div class="modal-image" id="montage-image"></div>
+                <div class="modal-image" id="montage-image" style="background-image: url('montage-bg.jpg'); background-position: center; background-size: cover;"></div>
                 <h2 class="modal-title">МОНТАЖ</h2>
                 <a href="https://drive.google.com/file/d/1lLObk3qjSrsEjtbfXVAJIYrX7YdY-jrw/view" 
                    class="modal-btn" 
@@ -143,7 +144,7 @@
                 <h2 class="modal-title"><i class="fas fa-info-circle"></i> Информация</h2>
                 <p class="modal-text">Бот находится в активной разработке.<br>
                 Все предложения отправляйте в <a href="https://t.me/dontev1l" class="link">телеграм-канал</a>.<br>
-                Версия: 2.0.1</p>
+                Версия: 2.1.1</p>
             </div>
         </div>
     </div>

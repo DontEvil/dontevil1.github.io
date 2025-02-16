@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
-
     const playSound = () => {
         try {
             clickSound.currentTime = 0;
@@ -37,43 +36,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Обработка кликов на основные кнопки
     const buttons = {
         'mfg-btn': 'mfg-modal',
         'montage-btn': 'montage-modal',
         'programs-btn': 'programs-modal',
         'info-btn': 'info-modal'
     };
-
     Object.keys(buttons).forEach(btnId => {
-        document.getElementById(btnId).addEventListener('click', () => {
-            playSound();
-            const modalId = buttons[btnId];
-            document.getElementById(modalId).style.display = 'flex';
-            tg.BackButton.show();
-        });
+        const button = document.getElementById(btnId);
+        if (button) {
+            button.addEventListener('click', () => {
+                playSound();
+                const modalId = buttons[btnId];
+                document.getElementById(modalId).style.display = 'flex';
+                tg.BackButton.show();
+            });
+        } else {
+            console.warn(`Кнопка с ID "${btnId}" не найдена.`);
+        }
     });
 
-    tg.onEvent('backButtonClicked', () => {
-        modals.forEach(modal => {
-            if (modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                tg.BackButton.hide();
-            }
-        });
+    // Обработка клика на кнопку "Магазин"
+    document.getElementById('store-btn')?.addEventListener('click', () => {
+        try {
+            playSound(); // Проигрываем звук при клике
+            window.location.href = 'store.html'; // Переход на страницу магазина
+        } catch (error) {
+            console.error('Ошибка при переходе на страницу магазина:', error);
+        }
     });
 
-    document.getElementById('youtube-btn').addEventListener('click', () => {
-        playSound();
-        tg.openLink('https://youtube.com/@dontev1l');
-    });
-
-    document.getElementById('character-image').addEventListener('click', function () {
-        this.style.transform = 'rotate(720deg)';
-        setTimeout(() => {
-            tg.openLink('https://t.me/dontev1l');
-        }, 1000);
-    });
-
+    // Закрытие модальных окон
     modals.forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
@@ -83,6 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Обработка кнопки "Назад" в Telegram
+    tg.onEvent('backButtonClicked', () => {
+        modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                tg.BackButton.hide();
+            }
+        });
+    });
+
+    // Кнопка YouTube
+    document.getElementById('youtube-btn')?.addEventListener('click', () => {
+        playSound();
+        tg.openLink('https://youtube.com/@dontev1l');
+    });
+
+    // Кнопка персонажа
+    document.getElementById('character-image')?.addEventListener('click', function () {
+        this.style.transform = 'rotate(720deg)';
+        setTimeout(() => {
+            tg.openLink('https://t.me/dontev1l');
+        }, 1000);
+    });
+
+    // Закрытие модальных окон по клавише Esc
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             modals.forEach(modal => {

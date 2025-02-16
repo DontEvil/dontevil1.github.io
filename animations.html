@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анимации</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+
+    <!-- Фоновое видео -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <div class="content-container">
+        <h2 class="modal-title">Анимации</h2>
+        <!-- Горизонтальный контейнер с карточками -->
+        <div class="button-row">
+            <!-- Промокод для Majestic RP -->
+            <div class="store-item" data-modal-id="majestic-modal">
+                <video class="store-video" autoplay loop muted poster="majestic-preview.jpg">
+                    <source src="majesticanim.mp4" type="video/mp4">
+                </video>
+                <h3 class="store-title">Промокод для Majestic RP</h3>
+                <p class="store-description">Анимация для вашего промокода - 500 рублей.</p>
+                <a href="https://t.me/d0ntevil" class="order-btn">Заказать</a>
+            </div>
+            <!-- Промокод для GTA5RP -->
+            <div class="store-item" data-modal-id="gta5rp-modal">
+                <video class="store-video" autoplay loop muted poster="gta5rp-preview.jpg">
+                    <source src="gta5rpanim.mp4" type="video/mp4">
+                </video>
+                <h3 class="store-title">Промокод для GTA5RP</h3>
+                <p class="store-description">Анимация для вашего промокода - 500 рублей.</p>
+                <a href="https://t.me/d0ntevil" class="order-btn">Заказать</a>
+            </div>
+        </div>
+    </div>
+    <!-- Модальные окна -->
+    <div class="modal" id="majestic-modal">
+        <div class="modal-content">
+            <video class="modal-video" autoplay loop muted>
+                <source src="majesticanim.mp4" type="video/mp4">
+            </video>
+            <h2 class="modal-title">Промокод для Majestic RP</h2>
+            <p class="modal-text">
+                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас! 
+                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично, что поможет выделиться среди конкурентов.
+            </p>
+            <a href="https://t.me/d0ntevil" class="modal-btn">Заказать</a>
+        </div>
+    </div>
+    <div class="modal" id="gta5rp-modal">
+        <div class="modal-content">
+            <video class="modal-video" autoplay loop muted>
+                <source src="gta5rpanim.mp4" type="video/mp4">
+            </video>
+            <h2 class="modal-title">Промокод для GTA5RP</h2>
+            <p class="modal-text">
+                Хотите увеличить охват ваших промокодов? Наша анимация — это идеальное решение для вас! 
+                С помощью нашей анимации ваш промокод будет выглядеть стильно и динамично, что поможет выделиться среди конкурентов.
+            </p>
+            <a href="https://t.me/d0ntevil" class="modal-btn">Заказать</a>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // Открытие модального окна при клике на видео
+        const storeItems = document.querySelectorAll('.store-item');
+        storeItems.forEach(item => {
+            const video = item.querySelector('.store-video');
+            video.addEventListener('click', () => {
+                const modalId = item.getAttribute('data-modal-id');
+                document.getElementById(modalId).style.display = 'flex';
+            });
+        });
+
+        // Закрытие модального окна по клику вне его области
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

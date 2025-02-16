@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+
+    <!-- Фоновое видео -->
+    <video autoplay loop muted playsinline class="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <div class="content-container">
+        <!-- Заголовок страницы -->
+        <h2 class="store-title">Магазин MFG!</h2>
+        <p class="store-subtitle">
+            Здесь вы найдете уникальные анимации для своих видео, а также услуги по созданию ярких превью и качественному монтажу. Мы постоянно обновляем ассортимент, чтобы помочь вам сделать ваши видео еще более увлекательными и профессиональными!
+        </p>
+
+        <!-- Контейнер с кнопками -->
+        <div class="button-grid">
+            <!-- Анимации -->
+            <a href="animations.html" class="dynamic-gradient-btn store-btn">
+                <span class="btn-title">АНИМАЦИИ</span>
+                <span class="btn-description">Анимации для ваших видео-роликов.</span>
+                <i class="fas fa-film btn-icon"></i>
+            </a>
+
+            <!-- Монтаж -->
+            <a href="montage.html" class="dynamic-gradient-btn store-btn">
+                <span class="btn-title">МОНТАЖ</span>
+                <span class="btn-description">Вы можете заказать монтаж для своего видео.</span>
+                <i class="fas fa-video btn-icon"></i>
+            </a>
+
+            <!-- Превью (в разработке) -->
+            <div class="disabled-btn store-btn">
+                <span class="btn-title">ПРЕВЬЮ</span>
+                <span class="btn-description">Превью для ваших видео (в разработке).</span>
+                <i class="fas fa-image btn-icon"></i>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

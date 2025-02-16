@@ -1,3 +1,4 @@
+/* Общие стили */
 * {
     margin: 0;
     padding: 0;
@@ -5,8 +6,6 @@
 }
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    background: url('https://i.pinimg.com/originals/ca/e1/1d/cae11df222ff8639d02aa7b81d1d296a.gif') fixed;
-    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,26 +14,32 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    color: white;
 }
-body::before {
-    content: '';
-    position: absolute;
+
+/* Фоновое видео */
+.background-video {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.6);
+    object-fit: cover;
     z-index: -1;
 }
+
+/* Контейнер контента */
 .content-container {
-    background: rgba(255,255,255,0.1);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     width: 100%;
     max-width: 600px;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
+
+/* Изображение персонажа */
 .character-image {
     width: 200px;
     height: 200px;
@@ -50,12 +55,16 @@ body::before {
     transform: rotate(15deg) scale(1.1);
     border-width: 4px;
 }
+
+/* Колонка кнопок */
 .button-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
     margin-bottom: 30px;
 }
+
+/* Основные кнопки */
 .main-btn {
     background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
     color: white;
@@ -68,6 +77,8 @@ body::before {
     align-items: center;
     gap: 10px;
     transition: 0.3s;
+    text-align: center;
+    text-decoration: none;
 }
 .main-btn i {
     font-size: 20px;
@@ -76,6 +87,42 @@ body::before {
     background: linear-gradient(45deg, #2d2d2d, #3a3a3a);
     transform: translateY(-3px);
 }
+
+/* Горячая кнопка "Монтаж" */
+.hot-btn {
+    background: linear-gradient(45deg, #ff4655, #ff8c00);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(255, 70, 85, 0.5);
+}
+.hot-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 70, 85, 0.8);
+}
+.fire-emoji {
+    font-size: 24px;
+    animation: fire-pulse 1.5s infinite alternate;
+}
+@keyframes fire-pulse {
+    from {
+        transform: scale(1);
+        color: #ff4655;
+    }
+    to {
+        transform: scale(1.2);
+        color: #ff8c00;
+    }
+}
+
+/* Нижняя панель */
 .bottom-panel {
     display: flex;
     justify-content: center;
@@ -92,7 +139,7 @@ body::before {
     height: 45px;
     border-radius: 50%;
     border: none;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
     cursor: pointer;
     transition: 0.3s;
@@ -104,15 +151,17 @@ body::before {
 .icon-label {
     color: white;
     font-size: 12px;
-    text-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 }
+
+/* Модальные окна */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     display: none;
     justify-content: center;
     align-items: center;
@@ -132,19 +181,18 @@ body::before {
     margin: 15px 0 10px;
     text-transform: uppercase;
 }
-#mfg-image {
-    background-image: url('mfg-bg.jpg');
-    background-size: cover;
+.modal-image {
     height: 200px;
     border-radius: 10px;
     margin: -20px -20px 20px -20px;
+    background-position: center;
+    background-size: cover;
 }
-#montage-image {
-    background-image: url('montage-bg.jpg');
-    background-size: cover;
-    height: 200px;
+.modal-video {
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-    margin: -20px -20px 20px -20px;
+    margin-bottom: 15px;
 }
 .modal-title {
     color: #ff4655;
@@ -189,25 +237,200 @@ body::before {
         transform: scale(1);
     }
 }
+
+/* Заголовок страницы */
+.store-title {
+    color: #ff4655;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Подзаголовок страницы */
+.store-subtitle {
+    color: #aaa;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Контейнер с кнопками */
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Динамические градиентные кнопки */
+.dynamic-gradient-btn {
+    background: linear-gradient(45deg, #ffffff, #808080, #000000);
+    background-size: 300% 300%; /* Увеличиваем размер градиента для анимации */
+    color: white;
+    border: none;
+    padding: 20px;
+    border-radius: 15px;
+    width: calc(30% - 20px); /* Три колонки на широких экранах */
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+    animation: gradient-animation 4s infinite; /* Добавляем анимацию */
+}
+.dynamic-gradient-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Анимация для динамического градиента */
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Отключенная кнопка */
+.disabled-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #aaa;
+    border: none;
+    padding: 20px;
+    border-radius: 15px;
+    width: calc(30% - 20px); /* Три колонки на широких экранах */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: not-allowed;
+    pointer-events: none; /* Отключение взаимодействия */
+}
+
+/* Название кнопки */
+.btn-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Описание кнопки */
+.btn-description {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Иконка кнопки */
+.btn-icon {
+    font-size: 24px;
+}
+
+/* Адаптивность для кнопок */
+@media (max-width: 768px) {
+    .dynamic-gradient-btn, .disabled-btn {
+        width: calc(45% - 20px); /* Две колонки на средних экранах */
+    }
+    .store-title {
+        font-size: 30px;
+    }
+}
 @media (max-width: 480px) {
-    .content-container {
-        padding: 15px;
-        border-radius: 0;
-        min-height: 100vh;
+    .dynamic-gradient-btn, .disabled-btn {
+        width: 100%; /* Одна колонка на маленьких экранах */
     }
-    
-    .character-image {
-        width: 150px;
-        height: 150px;
+    .store-title {
+        font-size: 24px;
     }
-    
-    .main-btn {
-        padding: 12px;
-        font-size: 14px;
+    .btn-title {
+        font-size: 18px;
     }
-    
-    .modal-content {
-        width: 95%;
-        padding: 15px;
+    .btn-description {
+        font-size: 12px;
+    }
+}
+
+/* Карточки анимаций */
+.store-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    width: calc(45% - 15px); /* Уменьшаем ширину на 10% */
+    cursor: pointer;
+    transition: transform 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.store-item:hover {
+    transform: scale(1.05);
+}
+
+/* Видео внутри карточки */
+.store-video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Заголовок карточки */
+.store-title {
+    color: white;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Описание карточки */
+.store-description {
+    color: #aaa;
+    margin-bottom: 15px;
+}
+
+/* Кнопка "Заказать" */
+.order-btn {
+    background: #28a745; /* Зеленый цвет */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+}
+.order-btn:hover {
+    background: #218838; /* Темнее зеленый */
+}
+
+/* Контейнер с горизонтальными кнопками */
+.button-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .store-item {
+        width: calc(45% - 15px); /* Две колонки на маленьких экранах */
+    }
+}
+@media (max-width: 480px) {
+    .store-item {
+        width: 100%; /* Одна колонка на очень маленьких экранах */
     }
 }
