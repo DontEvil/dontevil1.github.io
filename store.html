@@ -47,5 +47,36 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        // Настройка кнопки "Назад" для переходов между страницами
+        const tg = window.Telegram.WebApp;
+
+        function setupBackButton() {
+            if (document.referrer) {
+                tg.BackButton.show();
+                tg.BackButton.onClick(() => {
+                    window.history.back();
+                });
+            } else {
+                tg.BackButton.hide();
+            }
+        }
+
+        // Вызываем функцию при загрузке страницы
+        document.addEventListener("DOMContentLoaded", () => {
+            setupBackButton();
+
+            // Добавляем звуковые эффекты для всех интерактивных кнопок
+            const clickSound = document.getElementById('click-sound');
+            document.querySelectorAll('.dynamic-gradient-btn, .disabled-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    if (clickSound) {
+                        clickSound.currentTime = 0; // Сбрасываем звук, чтобы он мог воспроизводиться повторно
+                        clickSound.play();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
