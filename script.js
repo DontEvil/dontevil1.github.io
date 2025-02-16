@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tg.enableClosingConfirmation(); // Подтверждение закрытия
-    tg.BackButton.hide();
 
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
@@ -44,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'programs-btn': 'programs-modal',
         'info-btn': 'info-modal'
     };
+
     Object.keys(buttons).forEach(btnId => {
         const button = document.getElementById(btnId);
         if (button) {
@@ -51,32 +51,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 playSound();
                 const modalId = buttons[btnId];
                 document.getElementById(modalId).style.display = 'flex';
-                tg.BackButton.show();
+                showBackButtonIfModalOpen();
             });
-        } else {
-            console.warn(`Кнопка с ID "${btnId}" не найдена.`);
         }
     });
 
-    // Обработка клика на кнопку "Магазин"
-    document.getElementById('store-btn')?.addEventListener('click', () => {
-        try {
-            playSound(); // Проигрываем звук при клике
-            window.location.href = 'store.html'; // Переход на страницу магазина
-        } catch (error) {
-            console.error('Ошибка при переходе на страницу магазина:', error);
-        }
-    });
-
-    // Настройка кнопки "Назад" для переходов между страницами
+    // Настройка кнопки "Назад"
     function setupBackButton() {
-        if (document.referrer) {
+        if (document.referrer || isModalOpen()) {
             tg.BackButton.show();
             tg.BackButton.onClick(() => {
-                window.history.back();
+                if (isModalOpen()) {
+                    closeAllModals();
+                } else {
+                    window.history.back();
+                }
             });
         } else {
             tg.BackButton.hide();
+        }
+    }
+
+    // Проверка, открыто ли модальное окно
+    function isModalOpen() {
+        return Array.from(modals).some(modal => modal.style.display === 'flex');
+    }
+
+    // Закрытие всех модальных окон
+    function closeAllModals() {
+        modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    // Показ кнопки "Назад", если открыто модальное окно
+    function showBackButtonIfModalOpen() {
+        if (isModalOpen()) {
+            tg.BackButton.show();
         }
     }
 
@@ -95,12 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Обработка кнопки "Назад" в Telegram
     tg.onEvent('backButtonClicked', () => {
-        modals.forEach(modal => {
-            if (modal.style.display === 'flex') {
-                modal.style.display = 'none';
-                tg.BackButton.hide();
-            }
-        });
+        if (isModalOpen()) {
+            closeAllModals();
+        } else {
+            window.history.back();
+        }
     });
 
     // Кнопка YouTube
@@ -120,12 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Закрытие модальных окон по клавише Esc
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            modals.forEach(modal => {
-                if (modal.style.display === 'flex') {
-                    modal.style.display = 'none';
-                    tg.BackButton.hide();
-                }
-            });
+            closeAllModals();
+            tg.BackButton.hide();
         }
     });
 
