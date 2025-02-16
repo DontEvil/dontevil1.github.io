@@ -50,18 +50,28 @@ document.addEventListener('DOMContentLoaded', () => {
         return urlParams.get(param);
     }
 
+    // Функция для навигации с обновлением истории
+    function navigateTo(pageUrl) {
+        const url = new URL(pageUrl, window.location.origin);
+        url.searchParams.append('back', 'true'); // Добавляем параметр back=true
+        history.pushState({}, '', url.toString()); // Обновляем историю
+        window.location.reload(); // Перезагружаем страницу
+    }
+
     // Настройка состояния кнопок "Назад" и "Закрыть"
     function setupButtons() {
         if (getQueryParam('back') === 'true' || window.history.length > 1) {
-            tg.BackButton.show(); // Показываем кнопку "Назад"
-            tg.BackButton.onClick(() => {
-                console.log("Кнопка 'Назад' была нажата!");
-                if (window.history.length > 1) {
-                    window.history.back(); // Возвращаемся на предыдущую страницу
-                } else {
-                    tg.close(); // Закрываем Web App, если история пуста
-                }
-            });
+            if (tg.BackButton.isAvailable()) {
+                tg.BackButton.show(); // Показываем кнопку "Назад"
+                tg.BackButton.onClick(() => {
+                    console.log("Кнопка 'Назад' была нажата!");
+                    if (window.history.length > 1) {
+                        window.history.back(); // Возвращаемся на предыдущую страницу
+                    } else {
+                        tg.close(); // Закрываем Web App, если история пуста
+                    }
+                });
+            }
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
         } else {
             tg.BackButton.hide(); // Скрываем кнопку "Назад"
@@ -95,7 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 playSound();
                 const modalId = buttons[btnId];
                 document.getElementById(modalId).style.display = 'flex';
-                tg.BackButton.show(); // Показываем кнопку "Назад"
+                if (tg.BackButton.isAvailable()) {
+                    tg.BackButton.show(); // Показываем кнопку "Назад"
+                }
                 tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
             });
         } else {
@@ -108,8 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             playSound(); // Проигрываем звук при клике
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
-            tg.BackButton.show(); // Показываем кнопку "Назад"
-            window.location.href = 'store.html?back=true'; // Переход на страницу магазина
+            if (tg.BackButton.isAvailable()) {
+                tg.BackButton.show(); // Показываем кнопку "Назад"
+            }
+            navigateTo('store.html'); // Переход на страницу магазина
         } catch (error) {
             console.error('Ошибка при переходе на страницу магазина:', error);
         }
@@ -122,7 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
         video.addEventListener('click', () => {
             const modalId = item.getAttribute('data-modal-id');
             document.getElementById(modalId).style.display = 'flex';
-            tg.BackButton.show(); // Показываем кнопку "Назад"
+            if (tg.BackButton.isAvailable()) {
+                tg.BackButton.show(); // Показываем кнопку "Назад"
+            }
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
         });
     });
@@ -132,7 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
-                tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                if (tg.BackButton.isAvailable()) {
+                    tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                }
                 tg.MainButton.setParams({
                     text: "Закрыть",
                     is_visible: true,
@@ -162,7 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modals.forEach(modal => {
                 if (modal.style.display === 'flex') {
                     modal.style.display = 'none';
-                    tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                    if (tg.BackButton.isAvailable()) {
+                        tg.BackButton.hide(); // Скрываем кнопку "Назад"
+                    }
                     tg.MainButton.setParams({
                         text: "Закрыть",
                         is_visible: true,
@@ -180,8 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetPage) {
                 playSound();
                 tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
-                tg.BackButton.show(); // Показываем кнопку "Назад"
-                window.location.href = targetPage + '?back=true';
+                if (tg.BackButton.isAvailable()) {
+                    tg.BackButton.show(); // Показываем кнопку "Назад"
+                }
+                navigateTo(targetPage);
             }
         });
     });
