@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'programs-btn': 'programs-modal',
         'info-btn': 'info-modal'
     };
+
     Object.keys(buttons).forEach(btnId => {
         const button = document.getElementById(btnId);
         if (button) {
@@ -130,9 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Добавляем обработчики для кнопок в нижней панели
-    document.querySelectorAll('.icon-btn').forEach(button => {
+    document.querySelectorAll('.fixed-icon-btn').forEach(button => {
         button.addEventListener('click', () => {
-            const targetPage = button.getAttribute('data-target');
+            const targetPage = button.getAttribute('onclick').split("'")[1];
             if (targetPage) {
                 playSound();
                 window.location.href = targetPage;
@@ -141,9 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Добавляем звуковые эффекты для всех интерактивных кнопок
-    document.querySelectorAll('.main-btn, .icon-btn, .store-btn, .order-btn').forEach(button => {
+    document.querySelectorAll('.main-btn, .fixed-icon-btn, .store-btn, .order-btn').forEach(button => {
         button.addEventListener('click', () => {
             playSound();
         });
     });
 });
+
+// Функция для навигации
+function navigate(page) {
+    const clickSound = document.getElementById('click-sound');
+    clickSound.play(); // Проигрывание звука при нажатии
+    window.location.href = page; // Переход на указанную страницу
+}

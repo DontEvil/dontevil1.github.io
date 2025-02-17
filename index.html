@@ -10,12 +10,10 @@
 </head>
 <body>
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
-
     <!-- Фоновое видео -->
     <video autoplay loop muted playsinline class="background-video">
         <source src="background.mp4" type="video/mp4">
     </video>
-
     <div class="content-container">
         <!-- Персонаж -->
         <div class="image-container">
@@ -34,27 +32,6 @@
             <button class="main-btn" id="programs-btn">
                 <i class="fas fa-box-open"></i> Программы
             </button>
-        </div>
-        <!-- Нижняя панель -->
-        <div class="bottom-panel">
-            <div class="icon-wrapper">
-                <button class="icon-btn" id="youtube-btn">
-                    <i class="fab fa-youtube"></i>
-                </button>
-                <span class="icon-label">Ютуб</span>
-            </div>
-            <div class="icon-wrapper">
-                <button class="icon-btn" id="store-btn" onclick="window.location.href='store.html'">
-                    <i class="fas fa-store"></i>
-                </button>
-                <span class="icon-label">Магазин</span>
-            </div>
-            <div class="icon-wrapper">
-                <button class="icon-btn" id="info-btn">
-                    <i class="fas fa-info-circle"></i>
-                </button>
-                <span class="icon-label">Информация</span>
-            </div>
         </div>
         <!-- Модальные окна -->
         <div class="modal" id="mfg-modal">
@@ -148,6 +125,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Фиксированная нижняя панель -->
+    <div class="fixed-bottom-panel">
+        <button class="fixed-icon-btn" id="home-btn" onclick="navigate('index.html')">
+            <i class="fas fa-home"></i>
+        </button>
+        <button class="fixed-icon-btn" id="store-btn" onclick="navigate('store.html')">
+            <i class="fas fa-store"></i>
+        </button>
+        <button class="fixed-icon-btn" id="info-btn" onclick="navigate('info.html')">
+            <i class="fas fa-info-circle"></i>
+        </button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

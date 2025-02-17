@@ -246,8 +246,6 @@ body {
     text-align: center;
     margin-bottom: 20px;
 }
-
-/* Подзаголовок страницы */
 .store-subtitle {
     color: #aaa;
     font-size: 14px;
@@ -255,37 +253,31 @@ body {
     margin-bottom: 30px;
     line-height: 1.5;
 }
-
-/* Контейнер с кнопками */
 .button-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
 }
-
-/* Динамические градиентные кнопки */
 .dynamic-gradient-btn {
     background: linear-gradient(45deg, #ffffff, #808080, #000000);
-    background-size: 300% 300%; /* Увеличиваем размер градиента для анимации */
+    background-size: 300% 300%;
     color: white;
     border: none;
     padding: 20px;
     border-radius: 15px;
-    width: calc(30% - 20px); /* Три колонки на широких экранах */
+    width: calc(30% - 20px);
     text-align: center;
     text-decoration: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: transform 0.3s;
-    animation: gradient-animation 4s infinite; /* Добавляем анимацию */
+    animation: gradient-animation 4s infinite;
 }
 .dynamic-gradient-btn:hover {
     transform: scale(1.05);
 }
-
-/* Анимация для динамического градиента */
 @keyframes gradient-animation {
     0% {
         background-position: 0% 50%;
@@ -297,46 +289,36 @@ body {
         background-position: 0% 50%;
     }
 }
-
-/* Отключенная кнопка */
 .disabled-btn {
     background: rgba(255, 255, 255, 0.1);
     color: #aaa;
     border: none;
     padding: 20px;
     border-radius: 15px;
-    width: calc(30% - 20px); /* Три колонки на широких экранах */
+    width: calc(30% - 20px);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: not-allowed;
-    pointer-events: none; /* Отключение взаимодействия */
+    pointer-events: none;
 }
-
-/* Название кнопки */
 .btn-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
 }
-
-/* Описание кнопки */
 .btn-description {
     font-size: 14px;
     color: white;
     margin-bottom: 15px;
 }
-
-/* Иконка кнопки */
 .btn-icon {
     font-size: 24px;
 }
-
-/* Адаптивность для кнопок */
 @media (max-width: 768px) {
     .dynamic-gradient-btn, .disabled-btn {
-        width: calc(45% - 20px); /* Две колонки на средних экранах */
+        width: calc(45% - 20px);
     }
     .store-title {
         font-size: 30px;
@@ -344,7 +326,7 @@ body {
 }
 @media (max-width: 480px) {
     .dynamic-gradient-btn, .disabled-btn {
-        width: 100%; /* Одна колонка на маленьких экранах */
+        width: 100%;
     }
     .store-title {
         font-size: 24px;
@@ -362,7 +344,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 15px;
-    width: calc(45% - 15px); /* Уменьшаем ширину на 10% */
+    width: calc(45% - 15px);
     cursor: pointer;
     transition: transform 0.3s;
     position: relative;
@@ -374,8 +356,6 @@ body {
 .store-item:hover {
     transform: scale(1.05);
 }
-
-/* Видео внутри карточки */
 .store-video {
     width: 100%;
     height: auto;
@@ -383,23 +363,17 @@ body {
     object-fit: cover;
     margin-bottom: 10px;
 }
-
-/* Заголовок карточки */
 .store-title {
     color: white;
     font-size: 16px;
     margin: 5px 0;
 }
-
-/* Описание карточки */
 .store-description {
     color: #aaa;
     margin-bottom: 15px;
 }
-
-/* Кнопка "Заказать" */
 .order-btn {
-    background: #28a745; /* Зеленый цвет */
+    background: #28a745;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -409,28 +383,58 @@ body {
     transition: background-color 0.3s;
     width: 100%;
     text-align: center;
-    text-decoration: none; /* Убираем подчеркивание ссылки */
+    text-decoration: none;
 }
 .order-btn:hover {
-    background: #218838; /* Темнее зеленый */
+    background: #218838;
 }
-
-/* Контейнер с горизонтальными кнопками */
 .button-row {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
 }
-
-/* Адаптивность */
 @media (max-width: 768px) {
     .store-item {
-        width: calc(45% - 15px); /* Две колонки на маленьких экранах */
+        width: calc(45% - 15px);
     }
 }
 @media (max-width: 480px) {
     .store-item {
-        width: 100%; /* Одна колонка на очень маленьких экранах */
+        width: 100%;
     }
+}
+
+/* Фиксированная нижняя панель */
+.fixed-bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    z-index: 1000;
+}
+.fixed-icon-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fixed-icon-btn:hover {
+    transform: scale(1.1);
+}
+.fixed-icon-btn i {
+    font-size: 24px;
+    color: #000;
 }
