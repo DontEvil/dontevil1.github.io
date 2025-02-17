@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Проверяем, доступен ли Telegram WebApp
     if (!tg) {
-        console.error("Telegram WebApp не поддерживается в этом контексте.");
+        console.error("Telegram WebApp не поддерживается.");
         return;
     }
 
@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Массив для хранения истории страниц
-    let historyStack = [];
-    let currentHistoryIndex = -1;
+    let historyStack = ['/']; // Начальная страница
+    let currentHistoryIndex = 0;
 
-    // Функция для перехода между страницами
+    // Функция для перехода на новую страницу
     function navigateToPage(pageUrl) {
         // Если пользователь переходит на новую страницу, обрезаем историю после текущего индекса
         if (currentHistoryIndex < historyStack.length - 1) {
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentHistoryIndex > 0) {
             currentHistoryIndex--;
             const previousPage = historyStack[currentHistoryIndex];
-            history.pushState({ page: previousPage }, '', previousPage);
-            location.reload();
+            history.replaceState({ page: previousPage }, '', previousPage);
+            location.reload(); // Обновляем страницу для применения изменений
         } else {
             tg.close(); // Закрываем Web App, если история пуста
         }
@@ -96,12 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Sound playback error:', e);
         }
     };
-
-    // Функция для получения параметров из URL
-    function getQueryParam(param) {
-        const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(param);
-    }
 
     // Обработка кликов на основные кнопки
     const buttons = {
