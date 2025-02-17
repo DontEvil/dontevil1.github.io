@@ -3,12 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Проверяем, доступен ли Telegram WebApp
     if (!tg) {
-        console.error("Telegram WebApp не поддерживается.");
+        alert("Telegram WebApp не поддерживается.");
         return;
     }
 
+    alert("Telegram WebApp загружен успешно.");
+
     // Логирование платформы
-    console.log("Platform:", tg.platform);
+    alert("Platform: " + tg.platform);
 
     // Устанавливаем минимальный размер окна
     tg.MainButton.setParams({
@@ -23,9 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для перехода на новую страницу
     function navigateToPage(pageUrl) {
+        alert(`Переход на страницу: ${pageUrl}`);
+
         // Если пользователь переходит на новую страницу, обрезаем историю после текущего индекса
         if (currentHistoryIndex < historyStack.length - 1) {
             historyStack = historyStack.slice(0, currentHistoryIndex + 1);
+            alert("История обновлена.");
         }
         // Добавляем новую страницу в историю
         historyStack.push(pageUrl);
@@ -40,25 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для возврата назад
     function goBack() {
+        alert("Кнопка 'Назад' была нажата.");
+
         if (currentHistoryIndex > 0) {
             currentHistoryIndex--;
             const previousPage = historyStack[currentHistoryIndex];
+            alert(`Возвращаемся на страницу: ${previousPage}`);
             history.replaceState({ page: previousPage }, '', previousPage);
             location.reload(); // Обновляем страницу для применения изменений
         } else {
+            alert("История пуста, закрываем Web App.");
             tg.close(); // Закрываем Web App, если история пуста
         }
     }
 
     // Настройка состояния кнопок "Назад" и "Закрыть"
     function setupButtons() {
+        alert(`Текущий индекс в истории: ${currentHistoryIndex}`);
+
         if (currentHistoryIndex > 0) {
+            alert("Показываем кнопку 'Назад'.");
             tg.BackButton.show();
             tg.BackButton.onClick(() => {
                 goBack();
             });
             tg.MainButton.setParams({ is_visible: false });
         } else {
+            alert("Скрываем кнопку 'Назад'.");
             tg.BackButton.hide();
             tg.MainButton.setParams({
                 text: "Закрыть",
@@ -66,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 is_active: true
             });
             tg.MainButton.onClick(() => {
+                alert("Кнопка 'Закрыть' была нажата.");
                 tg.close();
             });
         }
@@ -76,9 +90,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             try {
                 tg.expand();
-                console.log("Web App expanded on PC.");
+                alert("Web App expanded on PC.");
             } catch (error) {
-                console.error('Ошибка при вызове tg.expand:', error);
+                alert('Ошибка при вызове tg.expand: ' + error.message);
             }
         }, 100);
     }
@@ -93,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clickSound.currentTime = 0;
             clickSound.play();
         } catch (e) {
-            console.log('Sound playback error:', e);
+            alert('Sound playback error: ' + e.message);
         }
     };
 
@@ -116,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 tg.MainButton.setParams({ is_visible: false });
             });
         } else {
-            console.warn(`Кнопка с ID "${btnId}" не найдена.`);
+            alert(`Кнопка с ID "${btnId}" не найдена.`);
         }
     });
 
@@ -128,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tg.BackButton.show();
             navigateToPage('store.html'); // Переход на страницу магазина
         } catch (error) {
-            console.error('Ошибка при переходе на страницу магазина:', error);
+            alert('Ошибка при переходе на страницу магазина: ' + error.message);
         }
     });
 
