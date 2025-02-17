@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     tg.enableClosingConfirmation(); // Подтверждение закрытия
-    tg.BackButton.hide();
 
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
@@ -48,6 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function getQueryParam(param) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(param);
+    }
+
+    // Функция для перехода между страницами
+    function navigateToPage(pageUrl) {
+        const backParam = getQueryParam('back') === 'true' ? '?back=true' : '';
+        history.pushState(null, '', pageUrl + backParam);
+        location.reload(); // Обновляем страницу для применения изменений
     }
 
     // Настройка состояния кнопок "Назад" и "Закрыть"
@@ -88,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Обработка события popstate
+    window.addEventListener('popstate', () => {
+        setupButtons(); // Перенастраиваем кнопки после возврата
+    });
+
     // Вызываем функцию при загрузке страницы
     setupButtons();
 
@@ -120,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playSound(); // Проигрываем звук при клике
             tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
             tg.BackButton.show(); // Показываем кнопку "Назад"
-            window.location.href = 'store.html?back=true'; // Переход на страницу магазина
+            navigateToPage('store.html'); // Переход на страницу магазина
         } catch (error) {
             console.error('Ошибка при переходе на страницу магазина:', error);
         }
@@ -192,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 playSound();
                 tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
                 tg.BackButton.show(); // Показываем кнопку "Назад"
-                window.location.href = targetPage + '?back=true';
+                navigateToPage(targetPage); // Переходим на новую страницу
             }
         });
     });
