@@ -1,103 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
 
-    // Проверяем, доступен ли Telegram WebApp
-    if (!tg) {
-        alert("Telegram WebApp не поддерживается.");
-        return;
-    }
-
-    alert("Telegram WebApp загружен успешно.");
-
     // Логирование платформы
-    alert("Platform: " + tg.platform);
+    console.log("Platform:", tg.platform);
 
     // Устанавливаем минимальный размер окна
     tg.MainButton.setParams({
         text: "Закрыть",
-        is_visible: true,
-        is_active: true
+        is_visible: false
     });
-
-    // Массив для хранения истории страниц
-    let historyStack = ['/']; // Начальная страница
-    let currentHistoryIndex = 0;
-
-    // Функция для перехода на новую страницу
-    function navigateToPage(pageUrl) {
-        alert(`Переход на страницу: ${pageUrl}`);
-
-        // Если пользователь переходит на новую страницу, обрезаем историю после текущего индекса
-        if (currentHistoryIndex < historyStack.length - 1) {
-            historyStack = historyStack.slice(0, currentHistoryIndex + 1);
-            alert("История обновлена.");
-        }
-        // Добавляем новую страницу в историю
-        historyStack.push(pageUrl);
-        currentHistoryIndex++;
-
-        // Обновляем URL страницы
-        history.pushState({ page: pageUrl }, '', pageUrl);
-
-        // Перезагружаем содержимое страницы
-        location.reload();
-    }
-
-    // Функция для возврата назад
-    function goBack() {
-        alert("Кнопка 'Назад' была нажата.");
-
-        if (currentHistoryIndex > 0) {
-            currentHistoryIndex--;
-            const previousPage = historyStack[currentHistoryIndex];
-            alert(`Возвращаемся на страницу: ${previousPage}`);
-            history.replaceState({ page: previousPage }, '', previousPage);
-            location.reload(); // Обновляем страницу для применения изменений
-        } else {
-            alert("История пуста, закрываем Web App.");
-            tg.close(); // Закрываем Web App, если история пуста
-        }
-    }
-
-    // Настройка состояния кнопок "Назад" и "Закрыть"
-    function setupButtons() {
-        alert(`Текущий индекс в истории: ${currentHistoryIndex}`);
-
-        if (currentHistoryIndex > 0) {
-            alert("Показываем кнопку 'Назад'.");
-            tg.BackButton.show();
-            tg.BackButton.onClick(() => {
-                goBack();
-            });
-            tg.MainButton.setParams({ is_visible: false });
-        } else {
-            alert("Скрываем кнопку 'Назад'.");
-            tg.BackButton.hide();
-            tg.MainButton.setParams({
-                text: "Закрыть",
-                is_visible: true,
-                is_active: true
-            });
-            tg.MainButton.onClick(() => {
-                alert("Кнопка 'Закрыть' была нажата.");
-                tg.close();
-            });
-        }
-    }
 
     // Проверяем платформу и вызываем expand()
     if (tg.platform === 'web') {
         setTimeout(() => {
             try {
-                tg.expand();
-                alert("Web App expanded on PC.");
+                tg.expand(); // Расширяем на весь экран для ПК
+                console.log("Web App expanded on PC.");
             } catch (error) {
-                alert('Ошибка при вызове tg.expand: ' + error.message);
+                console.error('Ошибка при вызове tg.expand:', error);
             }
-        }, 100);
+        }, 100); // Задержка 100 мс
     }
 
-    tg.enableClosingConfirmation();
+    tg.enableClosingConfirmation(); // Подтверждение закрытия
+    tg.BackButton.hide();
 
     const clickSound = document.getElementById('click-sound');
     const modals = document.querySelectorAll('.modal');
@@ -107,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clickSound.currentTime = 0;
             clickSound.play();
         } catch (e) {
-            alert('Sound playback error: ' + e.message);
+            console.log('Sound playback error:', e);
         }
     };
 
@@ -118,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         'programs-btn': 'programs-modal',
         'info-btn': 'info-modal'
     };
-
     Object.keys(buttons).forEach(btnId => {
         const button = document.getElementById(btnId);
         if (button) {
@@ -127,36 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 const modalId = buttons[btnId];
                 document.getElementById(modalId).style.display = 'flex';
                 tg.BackButton.show();
-                tg.MainButton.setParams({ is_visible: false });
             });
         } else {
-            alert(`Кнопка с ID "${btnId}" не найдена.`);
+            console.warn(`Кнопка с ID "${btnId}" не найдена.`);
         }
     });
 
     // Обработка клика на кнопку "Магазин"
     document.getElementById('store-btn')?.addEventListener('click', () => {
         try {
-            playSound();
-            tg.MainButton.setParams({ is_visible: false });
-            tg.BackButton.show();
-            navigateToPage('store.html'); // Переход на страницу магазина
+            playSound(); // Проигрываем звук при клике
+            window.location.href = 'store.html'; // Переход на страницу магазина
         } catch (error) {
-            alert('Ошибка при переходе на страницу магазина: ' + error.message);
+            console.error('Ошибка при переходе на страницу магазина:', error);
         }
     });
 
-    // Обработка кликов на видео-элементы для открытия модальных окон
-    const storeItems = document.querySelectorAll('.store-item');
-    storeItems.forEach(item => {
-        const video = item.querySelector('.store-video');
-        video.addEventListener('click', () => {
-            const modalId = item.getAttribute('data-modal-id');
-            document.getElementById(modalId).style.display = 'flex';
+    // Настройка кнопки "Назад" для переходов между страницами
+    function setupBackButton() {
+        if (document.referrer) {
             tg.BackButton.show();
-            tg.MainButton.setParams({ is_visible: false });
-        });
-    });
+            tg.BackButton.onClick(() => {
+                window.history.back();
+            });
+        } else {
+            tg.BackButton.hide();
+        }
+    }
+
+    // Вызываем функцию при загрузке страницы
+    setupBackButton();
 
     // Закрытие модальных окон
     modals.forEach(modal => {
@@ -164,11 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target === modal) {
                 modal.style.display = 'none';
                 tg.BackButton.hide();
-                tg.MainButton.setParams({
-                    text: "Закрыть",
-                    is_visible: true,
-                    is_active: true
-                });
+            }
+        });
+    });
+
+    // Обработка кнопки "Назад" в Telegram
+    tg.onEvent('backButtonClicked', () => {
+        modals.forEach(modal => {
+            if (modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                tg.BackButton.hide();
             }
         });
     });
@@ -194,11 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (modal.style.display === 'flex') {
                     modal.style.display = 'none';
                     tg.BackButton.hide();
-                    tg.MainButton.setParams({
-                        text: "Закрыть",
-                        is_visible: true,
-                        is_active: true
-                    });
                 }
             });
         }
@@ -210,9 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetPage = button.getAttribute('data-target');
             if (targetPage) {
                 playSound();
-                tg.MainButton.setParams({ is_visible: false });
-                tg.BackButton.show();
-                navigateToPage(targetPage);
+                window.location.href = targetPage;
             }
         });
     });
@@ -223,7 +146,4 @@ document.addEventListener('DOMContentLoaded', () => {
             playSound();
         });
     });
-
-    // Вызываем функцию при загрузке страницы
-    setupButtons();
 });

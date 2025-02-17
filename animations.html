@@ -9,10 +9,12 @@
 </head>
 <body>
     <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+
     <!-- Фоновое видео -->
     <video autoplay loop muted playsinline class="background-video">
         <source src="background.mp4" type="video/mp4">
     </video>
+
     <div class="content-container">
         <h2 class="modal-title">Анимации</h2>
         <!-- Горизонтальный контейнер с карточками -->
@@ -64,6 +66,7 @@
             <a href="https://t.me/d0ntevil" class="modal-btn">Заказать</a>
         </div>
     </div>
+    <script src="script.js"></script>
     <script>
         // Открытие модального окна при клике на видео
         const storeItems = document.querySelectorAll('.store-item');
@@ -81,40 +84,6 @@
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     modal.style.display = 'none';
-                }
-            });
-        });
-
-        // Логика управления кнопками "Назад" и "Закрыть"
-        document.addEventListener('DOMContentLoaded', () => {
-            const tg = window.Telegram.WebApp;
-
-            // Проверяем параметр "back" в URL
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
-
-            // Устанавливаем состояние кнопок
-            function setupButtons() {
-                if (getQueryParam('back') === 'true' || window.history.length > 1) {
-                    tg.BackButton.show(); // Показываем кнопку "Назад"
-                    tg.MainButton.setParams({ is_visible: false }); // Скрываем кнопку "Закрыть"
-                } else {
-                    tg.BackButton.hide(); // Скрываем кнопку "Назад"
-                    tg.MainButton.setParams({ is_visible: true }); // Показываем кнопку "Закрыть"
-                }
-            }
-
-            // Вызываем функцию при загрузке страницы
-            setupButtons();
-
-            // Обработка кнопки "Назад"
-            tg.onEvent('backButtonClicked', () => {
-                if (window.history.length > 1) {
-                    window.history.back(); // Возвращаемся на предыдущую страницу
-                } else {
-                    tg.close(); // Закрываем Web App, если история пуста
                 }
             });
         });
